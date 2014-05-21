@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login!, except: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -8,9 +10,10 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = 'Thanks for Signing Up!'
+      login_user!(@user)
       redirect_to user_url(@user)
     else
-      flash.now[:errors] = @user.errors
+      flash.now[:errors] = @user.errors.full_messages
       render :new
     end
   end

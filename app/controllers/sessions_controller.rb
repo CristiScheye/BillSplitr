@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       })
 
     if @user
-      session[:token] = @user.reset_session_token!
+      login_user!(@user)
       redirect_to user_url(@user)
     else
       flash.now[:errors] = ["Wrong email and/or password"]
