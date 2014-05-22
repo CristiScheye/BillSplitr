@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
     # [ <user1>, <user2> ]
     # user1.amt_loaned
 
+    #TODO: should only look at "active" bills
+
     find_by_sql([<<-SQL, user_id: self.id])
       SELECT users.*, SUM(bill_shares.amount) AS amt_loaned
       FROM bills
@@ -56,6 +58,8 @@ class User < ActiveRecord::Base
     # $ owed *by* user *to* the users returned, grouped by lender
     # [ <user1>, <user2> ]
     # user1.amt_owed
+
+    #TODO: should only look at "active" bills
 
     find_by_sql([<<-SQL, user_id: self.id])
       SELECT users.*, SUM(bill_shares.amount) AS amt_owed
