@@ -1,18 +1,16 @@
 BillSplit::Application.routes.draw do
+  root to: 'static_pages#home'
+
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:show] do
-      resources :bills, only: [:create]
-    end
+    resources :bills, only: [:index, :create]
 
     resources :bills, except: [:index, :create] do
       resources :bill_shares, only: [:index, :create]
     end
 
-    resources :bill_shares, only: [:update, :destroy]
+    resources :bill_shares, only: [:destroy]
   end
-
-  root to: 'static_pages#home'
 end

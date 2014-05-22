@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
     #TODO: should only look at "active" bills
 
-    find_by_sql([<<-SQL, user_id: self.id])
+    User.find_by_sql([<<-SQL, user_id: self.id])
       SELECT users.*, SUM(bill_shares.amount) AS amt_loaned
       FROM bills
       LEFT JOIN bill_shares ON bills.id = bill_shares.bill_id
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
 
     #TODO: should only look at "active" bills
 
-    find_by_sql([<<-SQL, user_id: self.id])
+    User.find_by_sql([<<-SQL, user_id: self.id])
       SELECT users.*, SUM(bill_shares.amount) AS amt_owed
       FROM bills
       LEFT JOIN bill_shares ON bills.id = bill_shares.bill_id
