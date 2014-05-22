@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :password, length: {minimum: 6}, allow_nil: true
   before_validation :set_session_token
 
-  has_many :bills_owned, class_name: 'Bill', foreign_key: 'lender_id'
+  has_many :bills, foreign_key: 'lender_id'
 
   def password=(unencrypted_password)
     @password = unencrypted_password

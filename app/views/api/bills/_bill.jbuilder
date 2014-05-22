@@ -1,0 +1,1 @@
+json.extract! bill, :id, :lender_id, :amount, :description

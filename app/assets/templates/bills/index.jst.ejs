@@ -1,0 +1,14 @@
+<div id="new-bill"></div>
+
+<table>
+  <tr>
+    <th>Amount</th>
+    <th>Description</th>
+  </tr>
+  <% bills.each(function(bill) { %>
+    <tr>
+      <td>$ <%= bill.escape('amount') %></td>
+      <td><%= bill.escape('description') %></td>
+    </tr>
+  <% }) %>
+</table>

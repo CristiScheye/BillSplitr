@@ -1,0 +1,1 @@
+window.BillSplit.Models.Bill = Backbone.Model.extend();
