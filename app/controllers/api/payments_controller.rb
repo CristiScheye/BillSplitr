@@ -11,4 +11,9 @@ class Api::PaymentsController < Api::ApiController
       }
     end
   end
+
+  def index
+    @payments = Payment.sent_or_received_by(current_user)
+    render :index
+  end
 end

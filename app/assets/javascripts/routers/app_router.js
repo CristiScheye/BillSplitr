@@ -5,14 +5,16 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
   },
 
   routes: {
-    '' : 'index',
-    'bills/:id' : 'show'
+    '' : 'billsIndex',
+    'bills' : 'billsIndex',
+    'bills/:id' : 'billShow',
+    'payments' : 'paymentsIndex'
   },
 
-  index: function () {
+  billsIndex: function () {
     this.bills.fetch();
     var users = BillSplit.users;
-    users.fetch()
+    users.fetch();
 
     var billsIndex = new BillSplit.Views.BillsIndex({
       collection: this.bills,
@@ -22,10 +24,10 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
     this._swapView(billsIndex);
   },
 
-  show: function (id) {
+  billShow: function (id) {
     var bill = this.bills.getOrFetch(id)
     var users = BillSplit.users;
-    users.fetch()
+    users.fetch();
 
     var billShow = new BillSplit.Views.BillShow({
       collection: this.bills,
@@ -33,6 +35,21 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
     });
 
     this._swapView(billShow);
+  },
+
+  paymentsIndex: function () {
+    var users = BillSplit.users;
+    users.fetch();
+
+    var payments = new BillSplit.Collections.Payments()
+    payments.fetch();
+
+    var paymentsIndex = new BillSplit.Views.PaymentsIndex({
+      collection: payments,
+      users: users
+    });
+
+    this._swapView(paymentsIndex);
   },
 
   _swapView: function (view) {

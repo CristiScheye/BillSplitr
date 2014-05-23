@@ -1,0 +1,25 @@
+<h2>New Payment</h2>
+<div id="new-payment"></div>
+
+<h2>All Payments</h2>
+
+<table class="table table-compact">
+  <tr>
+    <th>Amount</th>
+    <th>Sent From</th>
+    <th>Received By</th>
+  </tr>
+  <% payments.each(function(payment) { %>
+    <tr>
+        <td>
+          $ <%= payment.escape('amount') %>
+        </td>
+        <td>
+            <%= payment.sender().escape('email') %>
+        </td>
+        <td>
+            <%= payment.receiver().escape('email') %>
+        </td>
+    </tr>
+  <% }) %>
+</table>
