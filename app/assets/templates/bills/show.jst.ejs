@@ -1,14 +1,20 @@
 <h2><%= bill.escape('description') %></h2>
 
-<table>
-  <% bill.debtors().forEach(function(debtor) { %>
-    <td><%= debtor.escape('email') %></td>
-    <td>Amount they paid </td>
+<table class="table table-condensed">
+  <tr class="lender">
+    <td><%= lender.escape('email') %></td>
+    <td>$ <%= bill.escape('amount_not_charged')%></td>
+  </tr>
+  <% bill_shares.forEach(function(bill_share) { %>
+    <tr>
+      <td><%= bill_share.debtor().escape('email') %></td>
+      <td>$ <%= bill_share.get('amount') %></td>
+    </tr>
   <% }) %>
 
   <tr class="total">
     <td>Total</td>
-    <td><%= bill.escape('amount') %></td>
+    <td>$ <%= bill.escape('amount') %></td>
   </tr>
 </table>
 

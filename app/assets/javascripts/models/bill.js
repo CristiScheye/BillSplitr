@@ -5,15 +5,16 @@ window.BillSplit.Models.Bill = Backbone.Model.extend({
     });
     return this._bill_shares;
   },
-  debtors: function () {
-    this._debtors = this._debtors || new BillSplit.Collections.BillDebtors([], {
-      bill: this
-    });
-    return this._debtors;
+  lender: function () {
+    this._lender = this._lender || new BillSplit.Models.User();
+    return this._lender;
   },
   parse: function (resp) {
-    this.debtors().set(resp['debtors'], { parse: true });
-    delete resp['debtors'];
+    this.bill_shares().set(resp['bill_shares'], { parse: true });
+    delete resp['bill_shares'];
+
+    this.lender().set(resp['lender'], { parse: true });
+    delete resp['lender'];
 
     return resp;
   },

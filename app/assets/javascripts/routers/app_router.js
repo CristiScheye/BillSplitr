@@ -11,9 +11,12 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
 
   index: function () {
     this.bills.fetch();
+    var users = BillSplit.users;
+    users.fetch()
 
     var billsIndex = new BillSplit.Views.BillsIndex({
-      collection: this.bills
+      collection: this.bills,
+      users: users
     });
 
     this._swapView(billsIndex);
@@ -21,6 +24,8 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
 
   show: function (id) {
     var bill = this.bills.getOrFetch(id)
+    var users = BillSplit.users;
+    users.fetch()
 
     var billShow = new BillSplit.Views.BillShow({
       collection: this.bills,

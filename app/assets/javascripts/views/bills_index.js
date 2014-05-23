@@ -1,15 +1,13 @@
 window.BillSplit.Views.BillsIndex = Backbone.CompositeView.extend({
   template: JST['bills/index'],
 
-  initialize: function () {
+  initialize: function (options) {
     this.listenTo(this.collection, 'sync' , this.render)
-
-    var users = new BillSplit.Collections.Users()
-    users.fetch()
+    this.users = options.users
 
     var newBill = new BillSplit.Views.NewBill({
       collection: this.collection,
-      users: users
+      users: this.users
     })
     this.addSubview('#new-bill', newBill);
   },

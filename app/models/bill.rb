@@ -8,4 +8,9 @@ class Bill < ActiveRecord::Base
   has_many :debtors, through: :bill_shares, as: :debtor
 
   accepts_nested_attributes_for :bill_shares
+
+  def amount_not_charged
+    amount_charged = bill_shares.sum(:amount)
+    self.amount - amount_charged
+  end
 end
