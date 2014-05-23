@@ -11,18 +11,7 @@
     </label>
   </div>
 
-  <div class="form-group">
-  <label>Split with:
-    <select multiple class="form-control">
-      <% users.forEach(function(user){ %>
-        <option name="bill[bill_shares][]"
-                value="<%= user.escape('id') %>">
-        <%= user.escape('email') %>
-        (<%= user.escape('f_name') %> <%= user.escape('l_name') %>)
-        </option>
-      <% }) %>
-    </select>
-  </label>
+  <div id="new-bill-share">
   </div>
 
   <input type='submit' class="btn btn-primary">

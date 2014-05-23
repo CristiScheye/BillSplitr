@@ -1,27 +1,36 @@
-window.BillSplit.Views.NewBill = Backbone.View.extend({
+window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   events: {
     'submit form#new-bill' : 'submitBill',
   },
   initialize: function (options) {
     this.users = options.users;
-    this.listenTo(this.users, 'sync', this.render);
+
+    var users = new BillSplit.Collections.Users()
+    users.fetch()
+
+    var newBillShare = new BillSplit.Views.NewBillShare({
+      users: users
+    });
+    this.addSubview('#new-bill-share', newBillShare)
   },
   render: function () {
-    var content = this.template({
-      users: this.users
-    });
+    var content = this.template();
     this.$el.html(content);
+    this.attachSubviews
     return this;
   },
   submitBill: function (event) {
     event.preventDefault()
-    var form = $(event.target).serializeJSON()
-    var billAttrs = form['bill']
+    var billAttrs = $(event.target).serializeJSON()['bill']
 
-    debugger;
-
-
-    this.collection.create(billAttrs);
+    this.collection.create(billAttrs, {
+      success: function (model) {
+        //TODO: add validations on bill model
+        BillSplit.router.navigate('/bills/' + model.id, {
+          trigger: true
+        })
+      }
+    });
   },
   template: JST['bills/new']
 })

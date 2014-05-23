@@ -7,7 +7,7 @@ window.BillSplit = {
     var $rootEl = $('#content')
     this.bills = new BillSplit.Collections.Bills()
 
-    new BillSplit.Routers.AppRouter({
+    this.router = new BillSplit.Routers.AppRouter({
       $rootEl : $rootEl
     })
     Backbone.history.start();

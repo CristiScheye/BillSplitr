@@ -1,0 +1,1 @@
+window.BillSplit.Models.BillShare = Backbone.Model.extend()

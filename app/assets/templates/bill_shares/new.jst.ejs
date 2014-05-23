@@ -1,2 +1,15 @@
+<div class="form-group">
+  <label>Split with:
+    <select class="form-control"
+                     name="bill_shares[debtor_ids][]">
+      <% users.forEach(function(user){ %>
+        <option value="<%= user.escape('id') %>">
+        <%= user.escape('email') %>
+        (<%= user.escape('f_name') %> <%= user.escape('l_name') %>)
+        </option>
+      <% }) %>
+    </select>
+  </label>
+</div>
 
 

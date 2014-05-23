@@ -1,7 +1,16 @@
 window.BillSplit.Views.NewBillShare = Backbone.View.extend({
-  className: 'form-group',
+  events: {
+    'submit form#new-share-form' : 'handleNewShare'
+  },
+  handleNewShare: function (event) {
+    event.preventDefault();
+    var billShareAttrs = $(event.target).serializeJSON()
+    debugger;
+  },
   initialize: function (options) {
-
+    this.bill = options.bill;
+    this.users = options.users;
+    this.listenTo(this.users, 'sync', this.render);
   },
   render: function () {
     var content = this.template({

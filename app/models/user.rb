@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :bills, foreign_key: 'lender_id'
 
+  has_many :payments_made, class_name: 'Payment', foreign_key: :sender_id
+  has_many :payments_received, class_name: 'Payment', foreign_key: :receiver_id
+
   def password=(unencrypted_password)
     @password = unencrypted_password
     self.password_digest = BCrypt::Password.create(unencrypted_password)
