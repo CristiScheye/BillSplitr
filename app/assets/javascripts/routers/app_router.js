@@ -20,11 +20,10 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
   },
 
   show: function (id) {
-    // TODO: bills getOrFetch()
-
-    var bill = this.bills.get(id)
+    var bill = this.bills.getOrFetch(id)
 
     var billShow = new BillSplit.Views.BillShow({
+      collection: this.bills,
       model: bill
     });
 

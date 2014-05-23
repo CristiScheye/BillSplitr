@@ -5,6 +5,7 @@ BillSplit::Application.routes.draw do
   resources :users, only: [:new, :create]
 
   namespace :api, defaults: { format: :json } do
+    resources :users, only: [:index]
     resources :bills, only: [:index, :create]
 
     resources :bills, except: [:index, :create] do

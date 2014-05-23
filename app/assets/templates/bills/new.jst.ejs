@@ -1,11 +1,29 @@
-<form>
-  <label>Amount
-    <input type='number' name='bill[amount]'>
-  </label>
+<form class="form" id="new-bill">
+  <div class="form-input">
+    <label for="bill_amount">Amount
+    <input type='text' id="bill_amount" name='bill[amount]' class="form-control" placeholder="$0.00">
+    </label>
+  </div>
 
-  <label>Description
-    <input type='text' name='bill[description]'>
-  </label>
+  <div class="form-input">
+    <label>Description
+      <input type='text' name='bill[description]' class="form-control" placeholder="(e.g. skydiving)">
+    </label>
+  </div>
 
-  <input type='submit'>
+  <div class="form-group">
+  <label>Split with:
+    <select multiple class="form-control">
+      <% users.forEach(function(user){ %>
+        <option name="bill[bill_shares][]"
+                value="<%= user.escape('id') %>">
+        <%= user.escape('email') %>
+        (<%= user.escape('f_name') %> <%= user.escape('l_name') %>)
+        </option>
+      <% }) %>
+    </select>
+  </label>
+  </div>
+
+  <input type='submit' class="btn btn-primary">
 </form>
