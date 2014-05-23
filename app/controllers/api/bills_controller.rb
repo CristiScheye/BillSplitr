@@ -1,6 +1,6 @@
 class Api::BillsController < Api::ApiController
   def index
-    @bills = current_user.bills
+    @bills = Bill.by_or_shared_with(current_user)
     render :index
   end
 

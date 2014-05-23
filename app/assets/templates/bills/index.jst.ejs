@@ -1,9 +1,13 @@
+<h2>New Bill</h2>
 <div id="new-bill"></div>
 
-<table>
+<h2>All Bills</h2>
+
+<table class="table table-compact">
   <tr>
     <th>Amount</th>
     <th>Description</th>
+    <th>Posted By</th>
   </tr>
   <% bills.each(function(bill) { %>
     <tr>
@@ -15,6 +19,11 @@
         <td>
           <a href="/#/bills/<%= bill.escape('id') %>">
             <%= bill.escape('description') %>
+          </a>
+        </td>
+        <td>
+          <a href="/#/bills/<%= bill.escape('id') %>">
+            <%= bill.lender().escape('email') %>
           </a>
         </td>
     </tr>

@@ -9,6 +9,12 @@ class Bill < ActiveRecord::Base
 
   accepts_nested_attributes_for :bill_shares
 
+  def self.by_or_shared_with(user)
+    uid = user.id
+    Bill.includes(:bill_shares)
+        .where("bill_shares.debtor_id = ? OR bills.lender_id = ?", uid, uid)
+  end
+
   def amount_not_charged
     amount_charged = bill_shares.sum(:amount)
     self.amount - amount_charged

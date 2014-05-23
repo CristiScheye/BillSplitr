@@ -34,8 +34,6 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     event.preventDefault()
     var billAttrs = $(event.target).serializeJSON()
 
-    debugger;
-
     this.collection.create(billAttrs, {
       success: function (model) {
         //TODO: add validations on bill model
