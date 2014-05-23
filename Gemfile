@@ -12,7 +12,6 @@ gem 'jquery-ui-rails'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
-gem 'turbolinks'
 
 group :development do
   gem 'better_errors'

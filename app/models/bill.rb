@@ -4,6 +4,8 @@ class Bill < ActiveRecord::Base
 
   belongs_to :lender, class_name: 'User'
 
-  has_many :bill_shares
+  has_many :bill_shares, inverse_of: :bill
   has_many :debtors, through: :bill_shares, as: :debtor
+
+  accepts_nested_attributes_for :bill_shares
 end

@@ -1,27 +1,40 @@
 window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
+  addShareForm: function (event) {
+    debugger;
+    this.share_count += 1
+    var newBillShare = new BillSplit.Views.NewBillShare({
+      users: this.users,
+      count: this.share_count
+    });
+    this.addSubview('#new-bill-share', newBillShare)
+  },
   events: {
     'submit form#new-bill' : 'submitBill',
+    'click #add-share-form' : 'addShareForm'
   },
   initialize: function (options) {
     this.users = options.users;
+    this.users.fetch()
 
-    var users = new BillSplit.Collections.Users()
-    users.fetch()
+    this.share_count = 0;
 
     var newBillShare = new BillSplit.Views.NewBillShare({
-      users: users
+      users: this.users,
+      count: this.share_count
     });
     this.addSubview('#new-bill-share', newBillShare)
   },
   render: function () {
     var content = this.template();
     this.$el.html(content);
-    this.attachSubviews
+    this.attachSubviews();
     return this;
   },
   submitBill: function (event) {
     event.preventDefault()
-    var billAttrs = $(event.target).serializeJSON()['bill']
+    var billAttrs = $(event.target).serializeJSON()
+
+    debugger;
 
     this.collection.create(billAttrs, {
       success: function (model) {
