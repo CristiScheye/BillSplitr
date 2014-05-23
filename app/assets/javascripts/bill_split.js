@@ -14,6 +14,10 @@ window.BillSplit = {
   }
 };
 
+$(document).ready(function(){
+    BillSplit.initialize();
+  });
+
 
 Backbone.CompositeView = Backbone.View.extend({
   subviews: function(selector) {

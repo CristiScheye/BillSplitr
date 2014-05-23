@@ -7,8 +7,16 @@
   </tr>
   <% bills.each(function(bill) { %>
     <tr>
-      <td>$ <%= bill.escape('amount') %></td>
-      <td><%= bill.escape('description') %></td>
+        <td>
+          $ <a href="/#/bills/<%= bill.escape('id') %>">
+            <%= bill.escape('amount') %>
+          </a>
+        </td>
+        <td>
+          <a href="/#/bills/<%= bill.escape('id') %>">
+            <%= bill.escape('description') %>
+          </a>
+        </td>
     </tr>
   <% }) %>
 </table>

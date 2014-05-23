@@ -1,0 +1,13 @@
+<h2><%= bill.escape('description') %></h2>
+
+<table>
+  <% bill.debtors().forEach(function(debtor) { %>
+    <td><%= debtor.escape('email') %></td>
+    <td>Amount they paid </td>
+  <% }) %>
+
+  <tr class="total">
+    <td>Total</td>
+    <td><%= bill.escape('amount') %></td>
+  </tr>
+</table>

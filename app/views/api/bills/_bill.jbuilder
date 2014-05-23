@@ -1,1 +1,2 @@
-json.extract! bill, :id, :lender_id, :amount, :description
+json.extract! bill, :id, :amount, :description
+json.debtors bill.debtors, partial: 'api/users/user', as: :user

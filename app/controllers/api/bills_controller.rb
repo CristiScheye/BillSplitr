@@ -6,7 +6,7 @@ class Api::BillsController < Api::ApiController
 
   def show
     @bill = Bill.find(params[:id])
-    render :show
+    render partial: 'api/bills/bill', locals: { bill: @bill }
   end
 
   def create
