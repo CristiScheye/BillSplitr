@@ -1,7 +1,7 @@
 <form id="new-payment">
   <div class="form-group">
     <label>From:
-      <select name="payment[sender_id]">
+      <select class="form-control" name="payment[sender_id]">
         <option value=""></option>
         <% users.forEach(function(user){ %>
           <option value="<%= user.escape('id') %>"><%= user.escape('email') %></option>
@@ -12,7 +12,7 @@
 
   <div class="form-group">
     <label>To:
-      <select name="payment[receiver_id]">
+      <select class="form-control" name="payment[receiver_id]">
         <option value=""></option>
         <% users.forEach(function(user){ %>
           <option value="<%= user.escape('id') %>"><%= user.escape('email') %></option>
