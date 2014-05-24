@@ -1,7 +1,8 @@
 <a id="toggle-new-bill-form" class="btn btn-info show-form" >
   [ + ] Split New Bill
 </a>
-<div id="new-bill"></div>
+
+<div id="new-bill" ></div>
 
 <h2>All Bills</h2>
 
@@ -13,7 +14,6 @@
     <th>Posted By</th>
   </tr>
   <% bills.forEach(function(bill) { %>
-  <% debugger; %>
     <tr>
       <td>
         <a href="/#/bills/<%= bill.escape('id') %>">

@@ -1,5 +1,7 @@
 window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   initialize: function (options) {
+    this.listenTo(this.collection, 'invalid', this.errorMsg)
+
     this.users = options.users;
     this.users.fetch()
 
@@ -38,15 +40,23 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
 
   displayCalendar: function (event) {
     $(event.target).datepicker({ maxDate: 0 });
-  }
+  },
+
+  errorMsg: function (view, errors) {
+    var errorView = new BillSplit.Views.Errors({
+      errors: errors
+    });
+    this.addSubview('#errors', errorView);
+  },
 
   submitBill: function (event) {
     event.preventDefault()
+    this.removeSubviews('#errors'); //clear old error messages
+
     var billAttrs = $(event.target).serializeJSON()
 
     this.collection.create(billAttrs, {
       success: function (model) {
-        //TODO: add validations on bill model
         BillSplit.router.navigate('/bills/' + model.id, {
           trigger: true
         })
