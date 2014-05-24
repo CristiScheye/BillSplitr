@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def require_login!
-    flash[:errors] = ["Please log in first!"]
-    redirect_to new_session_path unless logged_in?
+    unless logged_in?
+      flash[:errors] = ["Please log in first!"]
+      redirect_to new_session_path
+    end
   end
 end
