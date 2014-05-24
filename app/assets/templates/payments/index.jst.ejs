@@ -7,12 +7,16 @@
 
 <table class="table table-compact">
   <tr>
+    <th>Date</th>
     <th>Amount</th>
     <th>Sent From</th>
     <th>Received By</th>
   </tr>
   <% payments.each(function(payment) { %>
     <tr>
+        <td>
+          <%= payment.escape('date') %>
+        </td>
         <td>
           $ <%= payment.escape('amount') %>
         </td>

@@ -24,7 +24,6 @@ class Api::BillsController < Api::ApiController
   private
 
   def bill_params
-    # NOTE: might need to also include :id in bill_shares
     clean_params = params.require(:bill).permit(
       :amount,
       :description,

@@ -1,4 +1,5 @@
-json.extract! bill, :id, :amount, :description, :date
+json.extract! bill, :id, :amount, :description
+json.date format_date(bill.date)
 
 json.amount_not_charged bill.amount_not_charged
 

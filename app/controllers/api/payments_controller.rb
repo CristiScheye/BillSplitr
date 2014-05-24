@@ -19,6 +19,12 @@ class Api::PaymentsController < Api::ApiController
 
   private
   def payment_params
-    params.require(:payment).permit(:receiver_id, :sender_id, :amount)
+    clean_params = params.require(:payment).permit(
+      :receiver_id,
+      :sender_id,
+      :amount,
+      :date)
+    clean_params[:date] = Date.strptime(clean_params[:date], '%m/%d/%Y')
+    clean_params
   end
 end
