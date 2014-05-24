@@ -9,7 +9,8 @@
     <th>Description</th>
     <th>Posted By</th>
   </tr>
-  <% bills.each(function(bill) { %>
+  <% bills.forEach(function(bill) { %>
+    <% debugger; %>
     <tr>
         <td>
           $ <a href="/#/bills/<%= bill.escape('id') %>">
@@ -23,7 +24,7 @@
         </td>
         <td>
           <a href="/#/bills/<%= bill.escape('id') %>">
-            <%= bill.receiver().escape('email') %>
+            <%= bill.lender().escape('email') %>
           </a>
         </td>
     </tr>
