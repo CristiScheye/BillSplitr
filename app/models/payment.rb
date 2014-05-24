@@ -1,5 +1,5 @@
 class Payment < ActiveRecord::Base
-  validates_presence_of :sender, :receiver, :amount
+  validates_presence_of :sender, :receiver, :amount, :date
   validates :amount, numericality: { greater_than: 0 }
 
   belongs_to :sender, class_name: 'User'

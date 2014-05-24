@@ -1,6 +1,5 @@
 window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   addShareForm: function (event) {
-    debugger;
     this.share_count += 1
     var newBillShare = new BillSplit.Views.NewBillShare({
       users: this.users,
@@ -10,7 +9,8 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   },
   events: {
     'submit form#new-bill' : 'submitBill',
-    'click #add-share-form' : 'addShareForm'
+    'click #add-share-form' : 'addShareForm',
+    'focus #bill-date' : 'displayCalendar'
   },
   initialize: function (options) {
     this.users = options.users;
@@ -43,5 +43,9 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
       }
     });
   },
-  template: JST['bills/new']
+  template: JST['bills/new'],
+
+  displayCalendar: function (event) {
+    $(event.target).datepicker({ maxDate: 0 });
+  }
 })
