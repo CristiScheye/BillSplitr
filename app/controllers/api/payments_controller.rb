@@ -3,7 +3,7 @@ class Api::PaymentsController < Api::ApiController
     @payment = Payment.new(payment_params)
 
     if @payment.save
-      render partial: 'api/payments/payment'
+      render partial: 'api/payments/payment', locals: { payment: @payment }
     else
       render json: {
         errors: @payment.errors.full_messages,
@@ -15,5 +15,10 @@ class Api::PaymentsController < Api::ApiController
   def index
     @payments = Payment.sent_or_received_by(current_user)
     render :index
+  end
+
+  private
+  def payment_params
+    params.require(:payment).permit(:receiver_id, :sender_id, :amount)
   end
 end
