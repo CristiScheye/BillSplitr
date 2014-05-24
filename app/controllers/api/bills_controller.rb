@@ -25,6 +25,16 @@ class Api::BillsController < Api::ApiController
 
   def bill_params
     # NOTE: might need to also include :id in bill_shares
-    params.require(:bill).permit(:amount, :description, bill_shares_attributes: [:id, :debtor_id, :amount])
+    clean_params = params.require(:bill).permit(
+      :amount,
+      :description,
+      :date,
+      bill_shares_attributes: [
+        :id,
+        :debtor_id,
+        :amount
+        ])
+    clean_params[:date] = Date.strptime(clean_params[:date], '%m/%d/%Y')
+    clean_params
   end
 end

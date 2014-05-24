@@ -7,28 +7,34 @@
 
 <table class="table table-compact">
   <tr>
-    <th>Amount</th>
+    <th>Date</th>
     <th>Description</th>
+    <th>Amount</th>
     <th>Posted By</th>
   </tr>
   <% bills.forEach(function(bill) { %>
     <% debugger; %>
     <tr>
-        <td>
-          $ <a href="/#/bills/<%= bill.escape('id') %>">
-            <%= bill.escape('amount') %>
-          </a>
-        </td>
-        <td>
-          <a href="/#/bills/<%= bill.escape('id') %>">
-            <%= bill.escape('description') %>
-          </a>
-        </td>
-        <td>
-          <a href="/#/bills/<%= bill.escape('id') %>">
-            <%= bill.lender().escape('email') %>
-          </a>
-        </td>
+      <td>
+        <a href="/#/bills/<%= bill.escape('id') %>">
+          <%= bill.escape('date') %>
+        </a>
+      </td>
+      <td>
+        <a href="/#/bills/<%= bill.escape('id') %>">
+          <%= bill.escape('description') %>
+        </a>
+      </td>
+      <td>
+        $ <a href="/#/bills/<%= bill.escape('id') %>">
+          <%= bill.escape('amount') %>
+        </a>
+      </td>
+      <td>
+        <a href="/#/bills/<%= bill.escape('id') %>">
+          <%= bill.lender().escape('email') %>
+        </a>
+      </td>
     </tr>
   <% }) %>
 </table>
