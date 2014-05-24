@@ -15,5 +15,31 @@ window.BillSplit.Models.Payment = Backbone.Model.extend({
   sender: function () {
     this._sender = this._sender || new BillSplit.Models.User();
     return this._sender;
+  },
+  validate: function (attrs) {
+    debugger;
+    var errors = [];
+
+    if (!attrs.sender_id) {
+      errors.push("Please select the user who sent the payment");
+    }
+
+    if (!attrs.receiver_id) {
+      errors.push("Please select the user who received the payment");
+    }
+
+    if (!attrs.amount) {
+      errors.push('Please enter an amount')
+    } else if(attrs.amount <= 0 ) {
+      errors.push('Please enter an amount > 0');
+    }
+
+    if (!attrs.date) {
+      errors.push('Please enter a date');
+    }
+
+    if (errors.length > 0){
+      return errors;
+    }
   }
 })

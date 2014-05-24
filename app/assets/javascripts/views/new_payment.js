@@ -1,5 +1,7 @@
-window.BillSplit.Views.NewPayment = Backbone.View.extend({
+window.BillSplit.Views.NewPayment = Backbone.CompositeView.extend({
   initialize: function (options) {
+    this.listenTo(this.collection, 'invalid', this.errorMsg)
+
     this.users = options.users;
     this.listenTo(this.users, 'sync', this.render)
   },
@@ -16,6 +18,7 @@ window.BillSplit.Views.NewPayment = Backbone.View.extend({
       users: this.users
     });
     this.$el.html(content);
+    this.attachSubviews();
     return this;
   },
 
@@ -23,8 +26,17 @@ window.BillSplit.Views.NewPayment = Backbone.View.extend({
     $(event.target).datepicker({ maxDate: 0 });
   },
 
+  errorMsg: function (view, errors) {
+    var errorView = new BillSplit.Views.Errors({
+      errors: errors
+    });
+    this.addSubview('#errors', errorView);
+  },
+
   submitPayment: function (event) {
     event.preventDefault();
+    this.removeSubviews('#errors'); //clear old error messages
+
     var paymentAttrs = $(event.target).serializeJSON()['payment'];
     this.collection.create(paymentAttrs);
   }

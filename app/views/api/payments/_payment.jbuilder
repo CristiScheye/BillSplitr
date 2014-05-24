@@ -1,5 +1,5 @@
 json.extract! payment, :id, :amount
-json.date format_date(bill.date)
+json.date format_date(payment.date)
 
 json.sender do
   json.id payment.sender.id
