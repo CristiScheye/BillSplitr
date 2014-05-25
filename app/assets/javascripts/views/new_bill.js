@@ -42,13 +42,6 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     $(event.target).datepicker({ maxDate: 0 });
   },
 
-  errorMsg: function (view, errors) {
-    var errorView = new BillSplit.Views.Errors({
-      errors: errors
-    });
-    this.addSubview('#errors', errorView);
-  },
-
   submitBill: function (event) {
     event.preventDefault()
     this.removeSubviews('#errors'); //clear old error messages

@@ -19,7 +19,6 @@ $(document).ready(function(){
     BillSplit.initialize();
   });
 
-
 Backbone.CompositeView = Backbone.View.extend({
   subviews: function(selector) {
     this._subviews = this._subviews || {}
@@ -86,6 +85,13 @@ Backbone.CompositeView = Backbone.View.extend({
     _.each(this.subviews(selector), function(subview){
       view.attachSubview(selector, subview);
     })
-  }
+  },
+
+  errorMsg: function (_view, errors) {
+    var errorView = new BillSplit.Views.Errors({
+      errors: errors
+    });
+    this.addSubview('#errors', errorView);
+  },
 })
 
