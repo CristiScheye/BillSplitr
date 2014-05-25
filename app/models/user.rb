@@ -37,13 +37,42 @@ class User < ActiveRecord::Base
     nil
   end
 
+  def balances_with_other_users
+    # should return an array of user objects with amount on them
+    # pos amount if they owe the user (self)
+    # neg amount if the user (self) owes them
+
+    #TODO find payment subtotals
+
+    # get array of all self.loan_subtotals
+    # get array of all self.debt_subtotals
+    # get array of all self.payments_sent
+    # get array of all self.payments_received
+
+    # create an empty hash
+    # iterate thru each of the above arrays,
+    # for the id of the thing returned, update the val of the hash
+
+    balances = Hash.new(0)
+    self.loan_subtotals.each do |sub|
+      balances[sub] += sub.amt_loaned
+    end
+
+    self.debt_subtotals.each do |sub|
+      balances[sub] -= sub.amt_owed
+    end
+
+    balances
+  end
+
+  protected
+
   def loan_subtotals
     # returns an array of user objects with attribute "amt_loaned" that represents
     # $ owed *to* user
     # [ <user1>, <user2> ]
     # user1.amt_loaned
 
-    #TODO: should only look at "active" bills
 
     User.find_by_sql([<<-SQL, user_id: self.id])
       SELECT users.*, SUM(bill_shares.amount) AS amt_loaned
@@ -57,12 +86,11 @@ class User < ActiveRecord::Base
   end
 
   def debt_subtotals
-    # returns an array of user objects with attribute "amt_debited" that represents
+    # returns an array of user objects with attribute "amt_owed" that represents
     # $ owed *by* user *to* the users returned, grouped by lender
     # [ <user1>, <user2> ]
     # user1.amt_owed
 
-    #TODO: should only look at "active" bills
 
     User.find_by_sql([<<-SQL, user_id: self.id])
       SELECT users.*, SUM(bill_shares.amount) AS amt_owed

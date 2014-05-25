@@ -5,10 +5,15 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
   },
 
   routes: {
-    '' : 'billsIndex',
+    '' : 'userShow',
     'bills' : 'billsIndex',
     'bills/:id' : 'billShow',
     'payments' : 'paymentsIndex'
+  },
+
+  userShow: function () {
+    var main =  new BillSplit.Views.UserShow();
+    this._swapView(main);
   },
 
   billsIndex: function () {
