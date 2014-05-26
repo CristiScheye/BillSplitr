@@ -62,6 +62,14 @@ class User < ActiveRecord::Base
       balances[sub] -= sub.amt_owed
     end
 
+    self.sent_payment_subtotals.each do |sub|
+      balances[sub] += sub.sum_amount
+    end
+
+    self.received_payment_subtotals.each do |sub|
+      balance[sub] -= sub.sum_amount
+    end
+
     balances
   end
 
@@ -100,5 +108,21 @@ class User < ActiveRecord::Base
       WHERE bill_shares.debtor_id = :user_id
       GROUP BY users.id
     SQL
+  end
+
+  def received_payment_subtotals
+    # returns an array of user objects with attribute "sum_amount" that represents
+    # $ received *by* user *from* others, grouped by user
+    # [ <user1>, <user2> ]
+    # user1.amt_received
+    self.payments_received.group(:sender_id).sum(:amount)
+  end
+
+  def sent_payment_subtotals
+    # returns an array of user objects with attribute "sum_amount" that represents
+    # $ sent *by* user *to* others, grouped by user
+    # [ <user1>, <user2> ]
+    # user1.amt_sent
+    self.payments_made.group(:sender_id).sum(:amount)
   end
 end
