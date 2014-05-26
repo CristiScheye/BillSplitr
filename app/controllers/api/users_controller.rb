@@ -4,9 +4,9 @@ class Api::UsersController < Api::ApiController
     render :index
   end
 
-  def show
+  def dashboard
     @user = current_user
     @user_balances = current_user.balances_with_other_users
-    render :show
+    render :dashboard
   end
 end
