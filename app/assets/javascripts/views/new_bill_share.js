@@ -20,7 +20,6 @@ window.BillSplit.Views.NewBillShare = Backbone.View.extend({
   },
 
   removeShareForm: function (event) {
-    debugger;
     this.trigger('removeShareForm', this)
   }
 

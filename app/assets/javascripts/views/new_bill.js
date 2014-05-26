@@ -83,11 +83,11 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     var $shareAmounts = this.$el.find('.share-amount');
     var $sliderText = this.$el.find('#slider-text')
     if (this.shareType === 'custom') {
-      $shareAmounts.prop('disabled', false);
+      $shareAmounts.prop('readonly', false);
       $shareAmounts.removeClass('split-even');
       $sliderText.html("Custom").removeClass('split-even').addClass('split-custom')
     } else {
-      $shareAmounts.prop('disabled', true);
+      $shareAmounts.prop('readonly', true);
       $shareAmounts.addClass('split-even');
       this.calculateEvenSplit();
       $sliderText.html("Even").addClass('split-even').removeClass('split-custom')
@@ -103,6 +103,6 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     var $shareAmounts = this.$el.find('.split-even');
     var $total = this.$el.find('#bill_amount');
     var subTotals = (parseFloat($total.val()) / ($shareAmounts.length + this.shareCount)) || 0
-    $shareAmounts.val(subTotals)
+    $shareAmounts.val(subTotals);
   }
 });
