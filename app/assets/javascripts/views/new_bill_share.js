@@ -4,9 +4,8 @@ window.BillSplit.Views.NewBillShare = Backbone.View.extend({
     this.users = options.users;
     this.listenTo(this.users, 'sync', this.render);
   },
-
   events: {
-    'submit form#new-share-form' : 'handleNewShare'
+    'click .remove-billshare' : 'removeShareForm'
   },
 
   template: JST['bill_shares/new'],
@@ -14,15 +13,15 @@ window.BillSplit.Views.NewBillShare = Backbone.View.extend({
   render: function () {
     var content = this.template({
       users: this.users,
-      count: this.count
+      count: this.count,
     });
     this.$el.html(content);
     return this;
   },
 
-  handleNewShare: function (event) {
-    event.preventDefault();
-    var billShareAttrs = $(event.target).serializeJSON()
+  removeShareForm: function (event) {
     debugger;
+    this.trigger('removeShareForm', this)
   }
+
 });

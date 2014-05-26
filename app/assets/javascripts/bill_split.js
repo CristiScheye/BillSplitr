@@ -34,12 +34,14 @@ Backbone.CompositeView = Backbone.View.extend({
   removeSubview: function(selector, subview) {
     var index = NaN;
     _.each(this.subviews(selector), function(currentSubview, idx) {
-      if (currentSubview.model === subview){
+      debugger;
+      if (currentSubview === subview){
         index = idx;
       }
     });
 
     if (!isNaN(index)) {
+      this.subviews(selector)[index].remove();
       this.subviews(selector).splice(index, 1);
     }
   },
@@ -94,4 +96,3 @@ Backbone.CompositeView = Backbone.View.extend({
     this.addSubview('#errors', errorView);
   },
 })
-
