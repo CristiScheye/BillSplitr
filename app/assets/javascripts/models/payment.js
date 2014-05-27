@@ -1,4 +1,5 @@
 window.BillSplit.Models.Payment = Backbone.Model.extend({
+  urlRoot: 'api/payments',
   parse: function (resp) {
     this.sender().set(resp['sender'], { parse: true });
     delete resp['sender'];
@@ -34,9 +35,6 @@ window.BillSplit.Models.Payment = Backbone.Model.extend({
       errors.push('Please enter an amount > 0');
     }
 
-    if (!attrs.date) {
-      errors.push('Please enter a date');
-    }
 
     if (errors.length > 0){
       return errors;

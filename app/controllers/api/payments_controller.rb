@@ -24,6 +24,7 @@ class Api::PaymentsController < Api::ApiController
       :sender_id,
       :amount,
       :date)
+    clean_params[:date] ||= Time.now().strftime('%m/%d/%Y')
     clean_params[:date] = Date.strptime(clean_params[:date], '%m/%d/%Y')
     clean_params
   end

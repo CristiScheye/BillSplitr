@@ -1,15 +1,52 @@
 <h1>Summary Table</h1>
 
+<h2>I Owe Friends</h2>
 <table class="table">
   <tr>
     <th>Friend</th>
     <th>Balance</th>
+    <th>Action</th>
   </tr>
   <% userBalances.forEach(function(user) { %>
-    <tr>
-      <th><%= user.escape('email') %></th>
-      <th><%= user.escape('balance') %></th>
-    </tr>
+    <% if (parseFloat(user.escape('balance')) < 0) { %>
+      <tr>
+        <td><%= user.escape('email') %></td>
+        <td class='neg-balance'>$ <%= user.escape('balance') %></td>
+        <td>
+          <a receiver-id="<%= user.escape('id') %>"
+              amt="<%= user.escape('balance') %>"
+              class="btn btn-default btn-xs mark-user-paid">
+            Mark Paid
+          </a>
+        </td>
+      </tr>
+    <% } %>
   <% }) %>
-
 </table>
+
+<h2>Friends Owe Me</h2>
+
+<table class="table">
+  <tr>
+    <th>Friend</th>
+    <th>Balance</th>
+    <th>Action</th>
+  </tr>
+  <% userBalances.forEach(function(user) { %>
+    <% if (parseFloat(user.escape('balance')) > 0) { %>
+      <tr>
+        <td><%= user.escape('email') %></td>
+        <td class='pos-balance'>$ <%= user.escape('balance') %></td>
+        <td>
+          <a sender-id="<%= user.escape('id') %>"
+              amt="<%= user.escape('balance') %>"
+              class="btn btn-default btn-xs mark-user-paid">
+            Mark Paid
+          </a>
+        </td>
+      </tr>
+    <% } %>
+  <% }) %>
+</table>
+
+<div id='new-payment'></div>

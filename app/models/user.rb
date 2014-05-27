@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :bill_share_loans, through: :bills, source: :bill_shares
 
   has_many :bill_share_debts, class_name: 'BillShare', foreign_key: 'debtor_id'
+  has_many :bill_debts, through: :bill_share_debts, source: :bill
 
   has_many :payments_made, class_name: 'Payment', foreign_key: :sender_id
   has_many :payments_received, class_name: 'Payment', foreign_key: :receiver_id
