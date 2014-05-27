@@ -10,6 +10,8 @@ window.BillSplit.Models.Bill = Backbone.Model.extend({
   },
   validate: function (obj) {
     var attrs = obj.bill;
+    var billShares = attrs.bill_shares_attributes;
+    var shareAmountTotal = 0;
     var errors = []
     if (!attrs.amount) {
       errors.push('Please enter an amount');
@@ -23,6 +25,24 @@ window.BillSplit.Models.Bill = Backbone.Model.extend({
 
     if (!attrs.date) {
       errors.push('Please select a date');
+    }
+
+    billShares.forEach(function(billShare) {
+      if (!billShare.amount) {
+        errors.push('Please enter an amount')
+      } else if (parseFloat(billShare.amount) < 0) {
+        errors.push('Bill share amount must be greater than 0')
+      } else {
+        shareAmountTotal += parseFloat(billShare.amount)
+      }
+
+      if (!billShare.debtor_id) {
+        errors.push('Please select a friend to share bill with')
+      }
+    })
+
+    if (shareAmountTotal > parseFloat(attrs.amount)) {
+      errors.push('Total bill amount is less than the totaled shared amounts')
     }
 
     if (errors.length > 0) {

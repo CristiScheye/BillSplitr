@@ -44,11 +44,11 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   addShareForm: function (event) {
-    this.shareCount += 1
     var newBillShare = new BillSplit.Views.NewBillShare({
       users: this.users,
       count: this.shareCount,
     });
+    this.shareCount += 1
     this.addSubview('#new-bill-share', newBillShare)
     this.listenToOnce(newBillShare, 'removeShareForm', this.removeShareForm)
     this.formatAmountFields();
