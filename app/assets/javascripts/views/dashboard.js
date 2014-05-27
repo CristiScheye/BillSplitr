@@ -3,9 +3,17 @@ window.BillSplit.Views.Dashboard = Backbone.CompositeView.extend({
     this.bills = options.bills;
     this.payments = options.payments
     this.users = options.users;
+    this.userBalances = options.userBalances;
 
-    this.listenTo(this.collection, 'sync', this.render)
+    this.listenTo(this.userBalances, 'sync', this.render)
     this.listenTo(this.bills, 'sync', this.render)
+
+    debugger;
+
+    var summaryView = new BillSplit.Views.Summary({
+      collection: this.userBalances
+    })
+    this.addSubview('#summary', summaryView)
   },
 
   events: {
@@ -17,9 +25,7 @@ window.BillSplit.Views.Dashboard = Backbone.CompositeView.extend({
   template: JST['layouts/dashboard'],
 
   render: function () {
-    var content = this.template({
-      userBalances: this.collection
-    });
+    var content = this.template();
     this.$el.html(content);
     this.attachSubviews();
     return this;
