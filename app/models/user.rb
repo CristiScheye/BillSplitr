@@ -76,31 +76,6 @@ class User < ActiveRecord::Base
   end
 
   def sent_payment_subtotals
-    self.payments_made.group(:sender_id).sum(:amount)
+    self.payments_made.group(:receiver_id).sum(:amount)
   end
-
-  # /api/balances
-  # 1. balances_with_other_users
-  # 2. User.where(...)
-  # render jbuilder template for users; look up their balance and stick that in
-  # { balances: {
-  #     123: {
-  #       received_payment_subtotal: 1000,
-  #       sent_payment_subtotal: 500
-  #     },
-  #
-  #     456: {
-  #       received_payment_subtotal: 750,
-  #       sent_payment_subtotal: 250
-  #     }
-  #   },
-
-
-  # SEND BACK USER OBJECTS WITH ADDITIONAL ATTRIBUTE balances WHICH IS A HASH WITH OTHER THINGS
-  #   [
-  #     # User.where(id: data[:balances].keys)
-  #   ]
-
-
-
 end
