@@ -24,8 +24,6 @@ window.BillSplit.Views.NewPrefilledPayment = Backbone.View.extend({
     return this;
   },
   submitPayment: function (event) {
-    debugger;
-
     $.ajax({
       type: "POST",
       url: 'api/payments',
