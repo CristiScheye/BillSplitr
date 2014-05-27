@@ -3,13 +3,6 @@
     <%= link_to "Bill Split", root_url, class: 'navbar-brand' %>
   </div>
 
-  <div class="navbar navbar-left">
-    <ul class="navbar-nav nav">
-      <li><%= link_to "Bills", '/#/bills' %></li>
-      <li><%= link_to "Payments", '/#/payments' %></li>
-    </ul>
-  </div>
-
   <div class="navbar navbar-right">
     <% if logged_in? %>
       <%= button_to "Log Out", session_url, method: :delete, class: 'btn' %>

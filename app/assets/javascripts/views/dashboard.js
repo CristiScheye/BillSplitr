@@ -13,7 +13,18 @@ window.BillSplit.Views.Dashboard = Backbone.CompositeView.extend({
     var summaryView = new BillSplit.Views.Summary({
       collection: this.userBalances
     })
-    this.addSubview('#summary', summaryView)
+    this.addSubview('#summary', summaryView);
+
+    var billsIndex = new BillSplit.Views.BillsIndex({
+      users: this.users,
+      collection: this.bills
+    });
+    this.addSubview('#history', billsIndex);
+
+    var paymentsIndex = new BillSplit.Views.PaymentsIndex({
+      collection: this.payments
+    });
+    this.addSubview('#history', paymentsIndex);
   },
 
   events: {

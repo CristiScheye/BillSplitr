@@ -1,32 +1,35 @@
-<a id="toggle-new-payment-form" class="btn btn-info show-form" >
-  [ + ] Record New Payment
-</a>
-
-<div id="new-payment"></div>
-
-<h2>All Payments</h2>
-
-<table class="table table-compact">
-  <tr>
-    <th>Date</th>
-    <th>Amount</th>
-    <th>Sent From</th>
-    <th>Received By</th>
-  </tr>
-  <% payments.each(function(payment) { %>
-    <tr>
-        <td>
-          <%= payment.escape('date') %>
-        </td>
-        <td>
-          $ <%= payment.escape('amount') %>
-        </td>
-        <td>
-            <%= payment.sender().escape('email') %>
-        </td>
-        <td>
-            <%= payment.receiver().escape('email') %>
-        </td>
-    </tr>
-  <% }) %>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-parent="#history" href="#collapsePayment">
+        Payment History
+      </a>
+    </h4>
+  </div>
+  <div id="collapsePayment" class="panel-collapse collapse">
+    <table class="table table-compact">
+      <tr>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Sent From</th>
+        <th>Received By</th>
+      </tr>
+      <% payments.each(function(payment) { %>
+        <tr>
+            <td>
+              <%= payment.escape('date') %>
+            </td>
+            <td>
+              $ <%= payment.escape('amount') %>
+            </td>
+            <td>
+                <%= payment.sender().escape('email') %>
+            </td>
+            <td>
+                <%= payment.receiver().escape('email') %>
+            </td>
+        </tr>
+      <% }) %>
+    </table>
+  </div>
+</div>

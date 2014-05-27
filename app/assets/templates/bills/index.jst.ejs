@@ -1,40 +1,44 @@
-<a id="toggle-new-bill-form" class="btn btn-info show-form" >
-  [ + ] Split New Bill
-</a>
-
-<div id="new-bill" ></div>
-
-<h2>All Bills</h2>
-
-<table class="table table-compact">
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Posted By</th>
-  </tr>
-  <% bills.forEach(function(bill) { %>
-    <tr>
-      <td>
-        <a href="/#/bills/<%= bill.escape('id') %>">
-          <%= bill.escape('date') %>
-        </a>
-      </td>
-      <td>
-        <a href="/#/bills/<%= bill.escape('id') %>">
-          <%= bill.escape('description') %>
-        </a>
-      </td>
-      <td>
-        $ <a href="/#/bills/<%= bill.escape('id') %>">
-          <%= bill.escape('amount') %>
-        </a>
-      </td>
-      <td>
-        <a href="/#/bills/<%= bill.escape('id') %>">
-          <%= bill.lender().escape('email') %>
-        </a>
-      </td>
-    </tr>
-  <% }) %>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-parent="#history" href="#collapseBills">
+        Bill History
+      </a>
+    </h4>
+  </div>
+  <div id="collapseBills" class="panel-collapse collapse">
+    <div class="panel-body">
+      <table class="table table-compact">
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Posted By</th>
+        </tr>
+        <% bills.forEach(function(bill) { %>
+          <tr>
+            <td>
+              <a href="/#/bills/<%= bill.escape('id') %>">
+                <%= bill.escape('date') %>
+              </a>
+            </td>
+            <td>
+              <a href="/#/bills/<%= bill.escape('id') %>">
+                <%= bill.escape('description') %>
+              </a>
+            </td>
+            <td>
+              $ <a href="/#/bills/<%= bill.escape('id') %>">
+                <%= bill.escape('amount') %>
+              </a>
+            </td>
+            <td>
+              <a href="/#/bills/<%= bill.escape('id') %>">
+                <%= bill.lender().escape('email') %>
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      </table>
+    </div>
+  </div>
