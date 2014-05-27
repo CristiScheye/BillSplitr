@@ -1,43 +1,46 @@
+<br>
 <div id='errors'></div>
 
 <form class="form" id="new-bill">
-  <div class="container">
-    <div class="row">
-      <h3>Bill Details</h3>
-
-      <div class="form-group">
-        <label>Amount
-        <input type='number' min='0' step='.01' id="bill_amount" name='bill[amount]' placeholder="$0.00" class="form-control">
-        </label>
-      </div>
-
-      <div class="form-group">
-        <label>Description
-          <input type='text' name='bill[description]' class="form-control" placeholder="(e.g. skydiving)">
-        </label>
-      </div>
-
-      <div class="form-group" id='bill-date'>
-        <label>Date
-          <input type='text' name='bill[date]' class='form-control'>
-        </label>
-      </div>
-
-      <h3>Split it... </h3>
-      <div id="share-type-slider">
-      </div>
-      <br>
-
-      <div id="new-bill-share">
-      </div>
-
-      <div class="form-group">
-        <a id="add-share-form" class="btn btn-success">+ Add More Friends</a>
-      <div>
-
-      <br>
-
-      <input type='submit' class="btn btn-primary btn-large" value="Split It!">
+  <div class="row">
+    <label for="bill_amount" class="col-sm-2">Total</label>
+    <div class="col-sm-4">
+      <input type='number' min='0' step='.01' id="bill_amount" name='bill[amount]' placeholder="$100.00" class="form-control">
+    </div>
+    <label for="bill-date" class="col-sm-2">Date</label>
+    <div class="col-xs-4">
+      <input id='bill-date' type='text' name='bill[date]' class='form-control' placeholder='Date'>
     </div>
   </div>
+
+  <br>
+
+  <div class="row">
+    <label for="bill_description" class="col-sm-2">Description</label>
+    <div class="col-sm-10">
+      <input type='text' name='bill[description]' class="form-control" placeholder="(e.g. skydiving)">
+    </div>
+  </div>
+
+  <br>
+
+  <ul id="share-type" class="nav nav-tabs">
+    <li class='active'><a data-id='split-even'>Split Evenly</a></li>
+    <li><a data-id='split-custom'>Custom Amounts</a></li>
+  </ul>
+
+  <br>
+
+  <div class="form-group">
+    <a id="add-share-form" class="btn btn-success">+ Add Friend</a>
+  <div>
+
+  <br>
+
+  <div id="new-bill-share">
+  </div>
+
+  <br>
+
+  <input type='submit' class="btn btn-primary btn-lg" value="Split It!">
 </form>

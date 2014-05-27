@@ -1,4 +1,4 @@
-#share-type-slider {
+/*#share-type-slider {
   height: 30px;
   width: 150px;
   background: green;
@@ -11,36 +11,33 @@
   content: '';
   height: 30px;
   width: 50px;
-  border-radius: 15px;
   background: white;
   position: absolute;
   top: -1px;
+  padding-left: 100px;
 }
 
 #share-type-slider a::before {
   content: 'before';
   background: blue;
-  height: 50px;
+  height: 30px;
   width: 80px;
-  border-radius: 15px;
   position: absolute;
-  top: -1px;
+  margin-left: -130px;
 }
 
 #share-type-slider a::after {
   content: 'after';
   height: 30px;
   width: 50px;
-  border-radius: 15px;
-  background: white;
+  background: black;
   position: absolute;
-  top: -1px;
 }
 
 
 #slider-text {
   color: white;
-}
+}*/
 
 
 /*.ui-slider .ui-slider-handle{
