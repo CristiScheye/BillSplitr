@@ -8,6 +8,7 @@
 }
 
 #share-type-slider a {
+  content: '';
   height: 30px;
   width: 50px;
   border-radius: 15px;
@@ -15,7 +16,7 @@
   position: absolute;
   top: -1px;
 }
-/*
+
 #share-type-slider a::before {
   content: 'before';
   background: blue;
@@ -24,9 +25,9 @@
   border-radius: 15px;
   position: absolute;
   top: -1px;
-}*/
+}
 
-/*#share-type-slider a::after {
+#share-type-slider a::after {
   content: 'after';
   height: 30px;
   width: 50px;
@@ -34,7 +35,7 @@
   background: white;
   position: absolute;
   top: -1px;
-}*/
+}
 
 
 #slider-text {
