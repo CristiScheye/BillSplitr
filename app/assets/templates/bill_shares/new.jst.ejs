@@ -17,7 +17,9 @@
 
 <div class="form-group">
   <label>Amount
-    <input type="text"
+    <input type="number"
+            step='.01'
+            min='0'
             name="bill[bill_shares_attributes][<%= count %>][amount]"
             class="form-control share-amount">
   </label>

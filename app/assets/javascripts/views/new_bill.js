@@ -102,7 +102,7 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   calculateEvenSplit: function () {
     var $shareAmounts = this.$el.find('.split-even');
     var $total = this.$el.find('#bill_amount');
-    var subTotals = (parseFloat($total.val()) / ($shareAmounts.length + this.shareCount)) || 0
+    var subTotals = (parseFloat($total.val()) / (this.shareCount + 1)) || 0
     $shareAmounts.val(subTotals);
   }
 });

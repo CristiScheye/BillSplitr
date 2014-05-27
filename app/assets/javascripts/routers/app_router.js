@@ -12,10 +12,20 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
   },
 
   dashboard: function () {
+    var users = BillSplit.users;
     var userBalances = new BillSplit.Collections.UserBalances();
+    var payments = new BillSplit.Collections.Payments()
+
+    payments.fetch();
+    this.bills.fetch();
+    users.fetch();
     userBalances.fetch();
+
     var main =  new BillSplit.Views.Dashboard({
-      collection: userBalances
+      collection: userBalances,
+      bills: this.bills,
+      payments: payments,
+      users: users
     });
     this._swapView(main);
   },
