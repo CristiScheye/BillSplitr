@@ -9,7 +9,7 @@ BillSplit::Application.routes.draw do
     resources :bills, only: [:index, :create]
     resources :payments, only: [:index, :create]
 
-    get '/dashboard', to: 'users#dashboard'
+    get '/dashboard', to: 'users#balances'
 
     resources :bills, except: [:index, :create] do
       resources :bill_shares, only: [:index, :create]

@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   before_validation :set_session_token
 
   has_many :bills, foreign_key: 'lender_id'
+  has_many :bill_share_loans, through: :bills, source: :bill_shares
+
+  has_many :bill_share_debts, class_name: 'BillShare', foreign_key: 'debtor_id'
 
   has_many :payments_made, class_name: 'Payment', foreign_key: :sender_id
   has_many :payments_received, class_name: 'Payment', foreign_key: :receiver_id
@@ -38,36 +41,21 @@ class User < ActiveRecord::Base
   end
 
   def balances_with_other_users
-    # should return an array of user objects with amount on them
-    # pos amount if they owe the user (self)
-    # neg amount if the user (self) owes them
-
-    #TODO find payment subtotals
-
-    # get array of all self.loan_subtotals
-    # get array of all self.debt_subtotals
-    # get array of all self.payments_sent
-    # get array of all self.payments_received
-
-    # create an empty hash
-    # iterate thru each of the above arrays,
-    # for the id of the thing returned, update the val of the hash
-
     balances = Hash.new(0)
-    self.loan_subtotals.each do |sub|
-      balances[sub] += sub.amt_loaned
+    self.loan_subtotals.each do |uid, amount|
+      balances[uid] += amount
     end
 
-    self.debt_subtotals.each do |sub|
-      balances[sub] -= sub.amt_owed
+    self.debt_subtotals.each do |uid, amount|
+      balances[uid] -= amount
     end
 
-    self.sent_payment_subtotals.each do |sub|
-      balances[sub] += sub.sum_amount
+    self.sent_payment_subtotals.each do |uid, amount|
+      balances[uid] += amount
     end
 
-    self.received_payment_subtotals.each do |sub|
-      balance[sub] -= sub.sum_amount
+    self.received_payment_subtotals.each do |uid, amount|
+      balances[uid] -= amount
     end
 
     balances
@@ -76,53 +64,43 @@ class User < ActiveRecord::Base
   protected
 
   def loan_subtotals
-    # returns an array of user objects with attribute "amt_loaned" that represents
-    # $ owed *to* user
-    # [ <user1>, <user2> ]
-    # user1.amt_loaned
-
-
-    User.find_by_sql([<<-SQL, user_id: self.id])
-      SELECT users.*, SUM(bill_shares.amount) AS amt_loaned
-      FROM bills
-      LEFT JOIN bill_shares ON bills.id = bill_shares.bill_id
-      LEFT JOIN users ON users.id = bill_shares.debtor_id
-      WHERE bills.lender_id = :user_id
-      GROUP BY users.id
-    SQL
-
+    self.bill_share_loans.group(:debtor_id).sum(:amount)
   end
 
   def debt_subtotals
-    # returns an array of user objects with attribute "amt_owed" that represents
-    # $ owed *by* user *to* the users returned, grouped by lender
-    # [ <user1>, <user2> ]
-    # user1.amt_owed
-
-
-    User.find_by_sql([<<-SQL, user_id: self.id])
-      SELECT users.*, SUM(bill_shares.amount) AS amt_owed
-      FROM bills
-      LEFT JOIN bill_shares ON bills.id = bill_shares.bill_id
-      LEFT JOIN users ON users.id = bills.lender_id
-      WHERE bill_shares.debtor_id = :user_id
-      GROUP BY users.id
-    SQL
+    self.bill_share_debts.joins(:bill).group(:lender_id).sum(:amount)
   end
 
   def received_payment_subtotals
-    # returns an array of user objects with attribute "sum_amount" that represents
-    # $ received *by* user *from* others, grouped by user
-    # [ <user1>, <user2> ]
-    # user1.amt_received
     self.payments_received.group(:sender_id).sum(:amount)
   end
 
   def sent_payment_subtotals
-    # returns an array of user objects with attribute "sum_amount" that represents
-    # $ sent *by* user *to* others, grouped by user
-    # [ <user1>, <user2> ]
-    # user1.amt_sent
     self.payments_made.group(:sender_id).sum(:amount)
   end
+
+  # /api/balances
+  # 1. balances_with_other_users
+  # 2. User.where(...)
+  # render jbuilder template for users; look up their balance and stick that in
+  # { balances: {
+  #     123: {
+  #       received_payment_subtotal: 1000,
+  #       sent_payment_subtotal: 500
+  #     },
+  #
+  #     456: {
+  #       received_payment_subtotal: 750,
+  #       sent_payment_subtotal: 250
+  #     }
+  #   },
+
+
+  # SEND BACK USER OBJECTS WITH ADDITIONAL ATTRIBUTE balances WHICH IS A HASH WITH OTHER THINGS
+  #   [
+  #     # User.where(id: data[:balances].keys)
+  #   ]
+
+
+
 end
