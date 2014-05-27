@@ -13,7 +13,7 @@ class Api::PaymentsController < Api::ApiController
   end
 
   def index
-    @payments = Payment.sent_or_received_by(current_user)
+    @payments = Payment.sent_or_received_by(current_user).order(date: :desc)
     render :index
   end
 
