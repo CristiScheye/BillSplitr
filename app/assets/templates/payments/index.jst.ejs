@@ -23,10 +23,10 @@
               $ <%= payment.escape('amount') %>
             </td>
             <td>
-                <%= payment.sender().escape('email') %>
+                <%= payment.sender().escape('f_name') %> <%= payment.sender().escape('l_name') %>
             </td>
             <td>
-                <%= payment.receiver().escape('email') %>
+                <%= payment.receiver().escape('f_name') %> <%= payment.receiver().escape('l_name') %>
             </td>
         </tr>
       <% }) %>

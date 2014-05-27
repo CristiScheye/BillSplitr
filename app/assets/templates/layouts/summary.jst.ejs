@@ -9,13 +9,13 @@
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) < 0) { %>
       <tr>
-        <td><%= user.escape('email') %></td>
+        <td><%= user.escape('f_name') %> <%= user.escape('l_name') %></td>
         <td class='neg-balance'>$ <%= user.escape('balance') %></td>
         <td>
           <a receiver-id="<%= user.escape('id') %>"
               amt="<%= user.escape('balance') %>"
               class="btn btn-default btn-xs mark-user-paid">
-            Mark Paid
+            Mark As Paid
           </a>
         </td>
       </tr>
@@ -34,13 +34,13 @@
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) > 0) { %>
       <tr>
-        <td><%= user.escape('email') %></td>
+        <td><%= user.escape('f_name') %> <%= user.escape('l_name') %></td>
         <td class='pos-balance'>$ <%= user.escape('balance') %></td>
         <td>
           <a sender-id="<%= user.escape('id') %>"
               amt="<%= user.escape('balance') %>"
               class="btn btn-default btn-xs mark-user-paid">
-            Mark Paid
+            Mark As Paid
           </a>
         </td>
       </tr>

@@ -2,7 +2,7 @@
 
 <table class="table table-condensed">
   <tr class="lender">
-    <td><%= lender.escape('email') %></td>
+    <td><%= lender.escape('f_name') %> <%= lender.escape('l_name') %></td>
     <td>$ <%= bill.escape('amount_not_charged')%></td>
   </tr>
   <% bill_shares.forEach(function(bill_share) { %>

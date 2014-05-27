@@ -17,26 +17,10 @@
         </tr>
         <% bills.forEach(function(bill) { %>
           <tr>
-            <td>
-              <a href="/#/bills/<%= bill.escape('id') %>">
-                <%= bill.escape('date') %>
-              </a>
-            </td>
-            <td>
-              <a href="/#/bills/<%= bill.escape('id') %>">
-                <%= bill.escape('description') %>
-              </a>
-            </td>
-            <td>
-              $ <a href="/#/bills/<%= bill.escape('id') %>">
-                <%= bill.escape('amount') %>
-              </a>
-            </td>
-            <td>
-              <a href="/#/bills/<%= bill.escape('id') %>">
-                <%= bill.lender().escape('email') %>
-              </a>
-            </td>
+            <td><%= bill.escape('date') %></td>
+            <td><%= bill.escape('description') %></td>
+            <td><%= bill.escape('amount') %></td>
+            <td><%= bill.lender().escape('f_name') %> <%= bill.lender().escape('l_name') %></td>
           </tr>
         <% }) %>
       </table>
