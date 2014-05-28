@@ -1,32 +1,38 @@
 window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
-    this.bills = BillSplit.bills
   },
 
   routes: {
     '' : 'dashboard',
-    'bills/:id' : 'billShow',
+    'bills/new' : 'new',
+    'bills/:id' : 'show',
   },
 
   dashboard: function () {
-    var users = BillSplit.users;
     var userBalances = new BillSplit.Collections.UserBalances();
-
-    this.bills.fetch();
-    users.fetch();
     userBalances.fetch();
 
     var main =  new BillSplit.Views.Dashboard({
-      userBalances: userBalances,
-      bills: this.bills,
-      users: users
+      userBalances: userBalances
     });
     this._swapView(main);
   },
 
-  billShow: function (id) {
-    var bill = this.bills.getOrFetch(id)
+  new: function () {
+    debugger;
+    var bills = BillSplit.bills
+    var users = BillSplit.users
+
+    var newBill = new BillSplit.Views.NewBill({
+      users: users,
+      collection: bills
+    });
+    this._swapView(newBill);
+  },
+
+  show: function (id) {
+    var bill = BillSplit.bills.getOrFetch(id)
     var users = BillSplit.users;
     users.fetch();
 

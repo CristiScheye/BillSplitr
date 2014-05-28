@@ -5,7 +5,7 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'invalid', this.errorMsg)
 
     this.users = options.users;
-    this.users.fetch()
+    this.users.fetch();
   },
 
   events: {
