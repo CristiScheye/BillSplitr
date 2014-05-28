@@ -19,6 +19,7 @@ window.BillSplit.Views.BillSharesIndex = Backbone.View.extend({
   },
 
   editBillShare: function (event) {
+    debugger;
     event.preventDefault();
     var shareId = $(event.target).attr('data-id');
     var status = $(event.target).attr('data-status');

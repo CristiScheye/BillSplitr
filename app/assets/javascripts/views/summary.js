@@ -23,7 +23,7 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
   editBalance: function (event) {
     event.preventDefault();
     debugger;
-    // get the bill shares collection that belongs to this user (might already be in a subview)
+
 
 
     this.collection.fetch();
@@ -50,7 +50,7 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     var userId = userId
 
     var bill_shares = new BillSplit.Collections.BillShares();
-    this.listenTo(bill_shares, 'sync', this.collection.fetch())
+    this.listenTo(bill_shares, 'sync', this.syncBalances)
     bill_shares.fetch({
       data: {
         user_id: userId
@@ -64,4 +64,7 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
       }
     })
   },
+  syncBalances: function() {
+    this.collection.fetch();
+  }
 })
