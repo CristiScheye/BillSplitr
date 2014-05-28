@@ -10,9 +10,6 @@ class User < ActiveRecord::Base
   has_many :bill_share_debts, class_name: 'BillShare', foreign_key: 'debtor_id'
   has_many :bill_debts, through: :bill_share_debts, source: :bill
 
-  has_many :payments_made, class_name: 'Payment', foreign_key: :sender_id
-  has_many :payments_received, class_name: 'Payment', foreign_key: :receiver_id
-
   def password=(unencrypted_password)
     @password = unencrypted_password
     self.password_digest = BCrypt::Password.create(unencrypted_password)
@@ -51,32 +48,16 @@ class User < ActiveRecord::Base
       balances[uid] -= amount
     end
 
-    self.sent_payment_subtotals.each do |uid, amount|
-      balances[uid] += amount
-    end
-
-    self.received_payment_subtotals.each do |uid, amount|
-      balances[uid] -= amount
-    end
-
     balances
   end
 
   protected
 
   def loan_subtotals
-    self.bill_share_loans.group(:debtor_id).sum(:amount)
+    self.bill_share_loans.where(status: 'active').group(:debtor_id).sum(:amount)
   end
 
   def debt_subtotals
-    self.bill_share_debts.joins(:bill).group(:lender_id).sum(:amount)
-  end
-
-  def received_payment_subtotals
-    self.payments_received.group(:sender_id).sum(:amount)
-  end
-
-  def sent_payment_subtotals
-    self.payments_made.group(:receiver_id).sum(:amount)
+    self.bill_share_debts.where(status: 'active').joins(:bill).group(:lender_id).sum(:amount)
   end
 end

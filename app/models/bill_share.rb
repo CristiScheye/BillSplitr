@@ -1,6 +1,8 @@
 class BillShare < ActiveRecord::Base
   validates_presence_of :bill, :debtor, :amount
   validates :amount, numericality: { greater_than: 0 }
+  validates :status, inclusion: {in: ['active', 'paid', 'void'] }
+  validates_uniqueness_of :bill, scope: [:debtor]
   # TODO: should also validate that it doesn't exceed the total amount of the bill
   # TODO: should also validate that it isn't assigned to current user
 

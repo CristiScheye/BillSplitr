@@ -15,26 +15,10 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
   },
 
   promptUserPayment: function (event) {
-    var btnData = $(event.target)
-    var senderId = btnData.attr('sender-id');
-    var receiverId = btnData.attr('receiver-id');
-    var amount = btnData.attr('amt');
-
-    if (senderId) { //the current user sends payment to other user
-      receiverId = BillSplit.currentUser.id
-    } else { //the current user receives payment from other user
-      senderId = BillSplit.currentUser.id
-    }
-
-    var newUserBalancePayment = new BillSplit.Views.NewPrefilledPayment({
-      senderId: senderId,
-      receiverId: receiverId,
-      amount: amount,
-      collection: BillSplit.payments
-    })
-    this.addSubview('#new-payment', newUserBalancePayment);
-    this.listenTo(newUserBalancePayment, 'payment-complete', this.completeUserPayment)
-    this.listenTo(newUserBalancePayment, 'payment-cancelled', this.removePaymentView)
+    alert('prompt user payment in Summary composite view!')
+    // TODO: this should change the bill share status
+    // (or all bill share statuses that this balance
+    // refers to) to 'paid'
   },
 
   completeUserPayment: function (subview) {

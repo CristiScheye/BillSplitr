@@ -37,18 +37,19 @@ mary = User.create({
   password: 'password'
 })
 
-b1 = Bill.create({ lender_id: mary.id, amount: 30, description: 'Kites', date: Date.today - 5 })
+b1 = Bill.create({ lender_id: guest.id, amount: 30, description: 'Kites', date: Date.today - 5 })
 b2 = Bill.create({ lender_id: guest.id, amount: 40, description: 'Bowling Night', date: Date.today - 1 })
 b3 = Bill.create({ lender_id: ferris.id, amount: 44, description: 'Kitchen sink ice cream challenge!!!', date: Date.today - 10 })
-b4 = Bill.create({ lender_id: guest.id, amount: 30.55, description: 'Dinner at Zachary\'s', date: Date.today - 3 })
+b4 = Bill.create({ lender_id: dude.id, amount: 30.55, description: 'Dinner at Zachary\'s', date: Date.today - 3 })
 
-BillShare.create({ bill_id: b1.id, debtor_id: guest.id, amount: 10 })
+BillShare.create({ bill_id: b1.id, debtor_id: mary.id, amount: 10 })
 BillShare.create({ bill_id: b1.id, debtor_id: ferris.id, amount: 10 })
+
+BillShare.create({ bill_id: b2.id, debtor_id: dude.id, amount: 15 })
 
 BillShare.create({ bill_id: b3.id, debtor_id: guest.id, amount: 11 })
 BillShare.create({ bill_id: b3.id, debtor_id: mary.id, amount: 11 })
 BillShare.create({ bill_id: b3.id, debtor_id: nancy.id, amount: 11 })
 
-BillShare.create({ bill_id: b2.id, debtor_id: dude.id, amount: 15 })
 
-BillShare.create({ bill_id: b4.id, debtor_id: nancy.id, amount: 12.50 })
+BillShare.create({ bill_id: b4.id, debtor_id: guest.id, amount: 12.50 })
