@@ -1,7 +1,4 @@
 window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
-  initialize: function () {
-    this.billHistories = {}
-  },
   events: {
     'click .mark-user-paid' : 'promptUserPayment',
     'click .bills-index' : 'toggleBillHistory'
@@ -54,18 +51,24 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     var view = this;
     var userId = userId
 
-    var bills = new BillSplit.Collections.Bills();
-    bills.fetch({
+    var bill_shares = new BillSplit.Collections.BillShares();
+    this.listenTo(bill_shares, 'sync', this.syncBalances)
+    bill_shares.fetch({
       data: {
         user_id: userId
       },
       success: function (res) {
-        var billsIndex = new BillSplit.Views.BillsIndex({
+        var billsIndex = new BillSplit.Views.BillSharesIndex({
           collection: res
         });
         view.addSubview('#bill-history-' + userId, billsIndex);
         view.$el.find('#bill-history-' + userId).collapse('show')
       }
     })
+  },
+
+  syncBalances: function () {
+    this.collection.fetch();
+    this.render();
   }
 })
