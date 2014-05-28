@@ -6,8 +6,10 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
   template: JST['layouts/summary'],
 
   render: function () {
+    var totals = this.collection.currentUserTotals();
     var content = this.template({
-      userBalances: this.collection
+      userBalances: this.collection,
+      totals: totals
     });
     this.$el.html(content);
     this.attachSubviews();

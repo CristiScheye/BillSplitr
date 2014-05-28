@@ -11,12 +11,6 @@ window.BillSplit.Views.Dashboard = Backbone.CompositeView.extend({
       collection: this.userBalances
     })
     this.addSubview('#summary', summaryView);
-
-    var billsIndex = new BillSplit.Views.BillsIndex({
-      users: this.users,
-      collection: this.bills
-    });
-    this.addSubview('#history', billsIndex);
   },
 
   events: {
