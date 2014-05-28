@@ -1,6 +1,9 @@
 window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
+  initialize: function (options) {
+    this.listenTo(this.collection, 'sync', this.render)
+  },
   events: {
-    'click .mark-user-paid' : 'promptUserPayment',
+    'click .edit-balance' : 'editBalance',
     'click .bills-index' : 'toggleBillHistory'
   },
 
@@ -17,42 +20,39 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     return this;
   },
 
-  promptUserPayment: function (event) {
-    alert('prompt user payment in Summary composite view!')
-    // TODO: this should change the bill share status
-    // (or all bill share statuses that this balance
-    // refers to) to 'paid'
-  },
+  editBalance: function (event) {
+    event.preventDefault();
+    debugger;
+    // get the bill shares collection that belongs to this user (might already be in a subview)
 
-  completeUserPayment: function (subview) {
-    this.removePaymentView(subview);
+
     this.collection.fetch();
-    this.render();
-  },
-
-  removePaymentView: function (subview) {
-    this.removeSubviews('#new-payment')
   },
 
   toggleBillHistory: function (event) {
-    this.$el.find('.bill-history').collapse('hide');
-
-    var userId = $(event.currentTarget).attr('data-id');
+    var userId = $(event.currentTarget).attr('data-index');
     var subs = this.subviews('#bill-history-' + userId);
     if (subs.length === 0) {
-      this.getBillHistory(userId);
-    } else {
-      this.$el.find('#bill-history-' + userId).collapse('show')
+      this.getBillHistory(userId, this.toggleCollapse)
+    } else{
+      this.toggleCollapse(userId);
     }
-
   },
 
-  getBillHistory: function (userId) {
+  toggleCollapse: function (userId) {
+    debugger;
+    _(this.$el.find('.bill-history')).forEach(function(el){
+      $(el).collapse('hide');
+    })
+    this.$el.find('#bill-history-' + userId).collapse('show')
+  },
+
+  getBillHistory: function (userId, callback) {
     var view = this;
     var userId = userId
 
     var bill_shares = new BillSplit.Collections.BillShares();
-    this.listenTo(bill_shares, 'sync', this.syncBalances)
+    this.listenTo(bill_shares, 'sync', this.collection.fetch())
     bill_shares.fetch({
       data: {
         user_id: userId
@@ -62,13 +62,8 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
           collection: res
         });
         view.addSubview('#bill-history-' + userId, billsIndex);
-        view.$el.find('#bill-history-' + userId).collapse('show')
+        callback.call(view, userId);
       }
     })
   },
-
-  syncBalances: function () {
-    this.collection.fetch();
-    this.render();
-  }
 })

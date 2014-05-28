@@ -1,6 +1,5 @@
 window.BillSplit.Models.BillShare = Backbone.Model.extend({
   parse: function(resp) {
-    debugger;
     this.debtor().set(resp['debtor'], { parse: true });
     delete resp['debtor'];
 

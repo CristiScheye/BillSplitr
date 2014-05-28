@@ -8,17 +8,17 @@
   </div>
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) < 0) { %>
-      <div class='row bills-index' data-id="<%= user.escape('id') %>">
+      <div class='row bills-index' data-index="<%= user.escape('id') %>">
         <div class="col-xs-6">
           <%= user.escape('f_name') %> <%= user.escape('l_name') %>
         </div>
         <div class='col-xs-3 neg-balance'>$ <%= user.escape('balance') %></div>
         <div class='col-xs-3'>
-          <a receiver-id="<%= user.escape('id') %>"
-              amt="<%= user.escape('balance') %>"
-              class="btn btn-default btn-xs mark-user-paid">
-            Mark As Paid
-          </a>
+          <button class='btn btn-xs btn-primary edit-balance'
+                  data-id="<%= user.id %>"
+                  data-status='paid'>
+            Settled
+          </button>
         </div>
       </div>
       <div id='bill-history-<%= user.escape('id') %>' class='bill-history'></div>
@@ -36,15 +36,15 @@
   </div>
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) > 0) { %>
-      <div class="row bills-index" data-id="<%= user.escape('id') %>">
+      <div class="row bills-index" data-index="<%= user.escape('id') %>">
         <div class="col-xs-6"><%= user.escape('f_name') %> <%= user.escape('l_name') %></div>
         <div class='col-xs-3 pos-balance'>$ <%= user.escape('balance') %></div>
         <div class="col-xs-3">
-          <a sender-id="<%= user.escape('id') %>"
-              amt="<%= user.escape('balance') %>"
-              class="btn btn-default btn-xs mark-user-paid">
-            Mark As Paid
-          </a>
+          <button class='btn btn-xs btn-primary edit-balance'
+                  data-id="<%= user.id %>"
+                  data-status='paid'>
+            Settled
+          </button>
         </div>
       </div>
       <div id='bill-history-<%= user.escape('id') %>' class='bill-history'></div>

@@ -16,6 +16,12 @@ class Api::BillSharesController < Api::ApiController
     end
   end
 
+  def update_batch
+    # params[:user_id]
+    # bill shares between current user and params[:user_id]
+    # update_all to have status params[:status]
+  end
+
   private
 
   def bill_share_params

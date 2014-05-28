@@ -10,7 +10,6 @@ window.BillSplit.Views.BillSharesIndex = Backbone.View.extend({
   template: JST['bill_shares/index'],
 
   render: function () {
-    debugger;
     var content = this.template({
       bill_shares: this.collection
     });
