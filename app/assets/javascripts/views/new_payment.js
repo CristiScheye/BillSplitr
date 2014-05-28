@@ -31,18 +31,20 @@ window.BillSplit.Views.NewPayment = Backbone.CompositeView.extend({
   submitPayment: function (event) {
     event.preventDefault();
     this.removeSubviews('#errors'); //clear old error messages
-    debugger;
 
-    var paymentAttrs = $(event.target).serializeJSON()['payment'];
-    if (this.formType = 'from-user') {
-      paymentAttrs.sender_id = BillSplit.currentUser.id;
-      paymentAttrs.receiver_id = $(event.target)
+    var paymentAttrs = $(event.target).serializeJSON();
+    if (this.formType === 'from-user') {
+      paymentAttrs.payment.sender_id = BillSplit.currentUser.id;
+      paymentAttrs.payment.receiver_id = $(event.target).find('#user_id').val()
+    } else {
+      paymentAttrs.payment.sender_id = $(event.target).find('#user_id').val()
+      paymentAttrs.payment.receiver_id = BillSplit.currentUser.id;
     }
+    debugger;
     this.collection.create(paymentAttrs);
   },
 
   toggleForm: function (event) {
-    debugger;
     $(event.currentTarget).find('li').toggleClass('active');
     this.formType = $(event.target).attr('data-id');
     var label = this.$el.find('label#user-select');

@@ -11,7 +11,8 @@ window.BillSplit.Views.NewPrefilledPayment = Backbone.View.extend({
     this.listenTo(this.receiver, 'sync', this.render)
   },
   events: {
-    'click #submit-payment' : 'submitPayment'
+    'click #submit-payment' : 'submitPayment',
+    'click #cancel-payment' : 'cancelPayment'
   },
   template: JST['payments/new_prefilled'],
   render: function () {
@@ -23,18 +24,34 @@ window.BillSplit.Views.NewPrefilledPayment = Backbone.View.extend({
     this.$el.html(content);
     return this;
   },
+
+  cancelPayment: function (event) {
+    this.trigger('payment-cancelled', this);
+  },
   submitPayment: function (event) {
-    $.ajax({
-      type: "POST",
-      url: 'api/payments',
-      data: {payment: {
-        sender_id: this.sender.id,
-        receiver_id: this.receiver.id,
-        amount: this.amount
-      }},
-      success: function (resp) {
-        this.trigger('payment-made', this);
+    debugger;
+    var paymentAttrs = { payment: {
+      sender_id: this.sender.id,
+      receiver_id: this.receiver.id,
+      amount: this.amount
+    }}
+
+    this.collection.create(paymentAttrs, {
+      success: function () {
+        this.trigger('payment-complete', this);
       }.bind(this)
-    });
+    })
+    // $.ajax({
+    //   type: "POST",
+    //   url: 'api/payments',
+    //   data: {payment: {
+    //     sender_id: this.sender.id,
+    //     receiver_id: this.receiver.id,
+    //     amount: this.amount
+    //   }},
+    //   success: function () {
+    //     this.trigger('payment-complete', this);
+    //   }.bind(this)
+    // });
   }
 })

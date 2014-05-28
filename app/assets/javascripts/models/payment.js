@@ -17,8 +17,9 @@ window.BillSplit.Models.Payment = Backbone.Model.extend({
     this._sender = this._sender || new BillSplit.Models.User();
     return this._sender;
   },
-  validate: function (attrs) {
+  validate: function (obj) {
     debugger;
+    var attrs = obj.payment;
     var errors = [];
 
     if (!attrs.sender_id) {

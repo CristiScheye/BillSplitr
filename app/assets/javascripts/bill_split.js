@@ -4,13 +4,14 @@ window.BillSplit = {
   Views: {},
   Routers: {},
   initialize: function() {
-    var $rootEl = $('#content')
-    this.bills = new BillSplit.Collections.Bills()
-    this.users = new BillSplit.Collections.Users()
+    var $rootEl = $('#content');
+    this.bills = new BillSplit.Collections.Bills();
+    this.payments = new BillSplit.Collections.Payments();
+    this.users = new BillSplit.Collections.Users();
 
     this.router = new BillSplit.Routers.AppRouter({
       $rootEl : $rootEl
-    })
+    });
     Backbone.history.start();
   }
 };
