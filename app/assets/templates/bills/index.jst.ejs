@@ -1,28 +1,16 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">
-      <a data-toggle="collapse" data-parent="#history" href="#collapseBills">
-        Bill History
-      </a>
-    </h4>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3">Date</div>
+    <div class="col-xs-3">Description</div>
+    <div class="col-xs-3">Amount</div>
+    <div class="col-xs-3">Posted By</div>
   </div>
-  <div id="collapseBills" class="panel-collapse collapse">
-    <div class="panel-body">
-      <table class="table table-compact">
-        <tr>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>Posted By</th>
-        </tr>
-        <% bills.forEach(function(bill) { %>
-          <tr>
-            <td><%= bill.escape('date') %></td>
-            <td><%= bill.escape('description') %></td>
-            <td><%= bill.escape('amount') %></td>
-            <td><%= bill.lender().escape('f_name') %> <%= bill.lender().escape('l_name') %></td>
-          </tr>
-        <% }) %>
-      </table>
+  <% bills.forEach(function(bill) { %>
+    <div>
+      <div class="col-xs-3"><%= bill.escape('date') %></div>
+      <div class="col-xs-3"><%= bill.escape('description') %></div>
+      <div class="col-xs-3"><%= bill.escape('amount') %></div>
+      <div class="col-xs-3"><%= bill.lender().escape('f_name') %> <%= bill.lender().escape('l_name') %></div>
     </div>
-  </div>
+  <% }) %>
+</div>

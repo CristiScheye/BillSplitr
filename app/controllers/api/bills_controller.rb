@@ -1,6 +1,6 @@
 class Api::BillsController < Api::ApiController
   def index
-    @bills = Bill.by_or_shared_with(current_user).order(date: :desc)
+    @bills = Bill.between_users(current_user.id, params[:user_id]).order(date: :desc)
     render :index
   end
 

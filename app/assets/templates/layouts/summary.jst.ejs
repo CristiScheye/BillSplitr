@@ -1,49 +1,53 @@
 <h1>My Net Worth: $<%= totals.net %></h1>
 <h2>I Owe Friends $<%= totals.debt %></h2>
-<table class="table">
-  <tr>
-    <th>Friend</th>
-    <th>Balance</th>
-    <th>Action</th>
-  </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">Friend</div>
+    <div class="col-xs-3">Balance</div>
+    <div class="col-xs-3">Action</div>
+  </div>
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) < 0) { %>
-      <tr>
-        <td><%= user.escape('f_name') %> <%= user.escape('l_name') %></td>
-        <td class='neg-balance'>$ <%= user.escape('balance') %></td>
-        <td>
+      <div class='row bills-index' data-id="<%= user.escape('id') %>">
+        <div class="col-xs-6">
+          <%= user.escape('f_name') %> <%= user.escape('l_name') %>
+        </div>
+        <div class='col-xs-3 neg-balance'>$ <%= user.escape('balance') %></div>
+        <div class='col-xs-3'>
           <a receiver-id="<%= user.escape('id') %>"
               amt="<%= user.escape('balance') %>"
               class="btn btn-default btn-xs mark-user-paid">
             Mark As Paid
           </a>
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div id='bill-history-<%= user.escape('id') %>' class='bill-history'></div>
     <% } %>
   <% }) %>
-</table>
+</div>
 
 <h2>Friends Owe Me $<%= totals.credit %></h2>
 
-<table class="table">
-  <tr>
-    <th>Friend</th>
-    <th>Balance</th>
-    <th>Action</th>
-  </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">Friend</div>
+    <div class="col-xs-3">Balance</div>
+    <div class="col-xs-3">Action</div>
+  </div>
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) > 0) { %>
-      <tr>
-        <td><%= user.escape('f_name') %> <%= user.escape('l_name') %></td>
-        <td class='pos-balance'>$ <%= user.escape('balance') %></td>
-        <td>
+      <div class="row bills-index" data-id="<%= user.escape('id') %>">
+        <div class="col-xs-6"><%= user.escape('f_name') %> <%= user.escape('l_name') %></div>
+        <div class='col-xs-3 pos-balance'>$ <%= user.escape('balance') %></div>
+        <div class="col-xs-3">
           <a sender-id="<%= user.escape('id') %>"
               amt="<%= user.escape('balance') %>"
               class="btn btn-default btn-xs mark-user-paid">
             Mark As Paid
           </a>
-        </td>
-      </tr>
+        </div>
+      </div>
+      <div id='bill-history-<%= user.escape('id') %>' class='bill-history'></div>
     <% } %>
   <% }) %>
-</table>
+</div>

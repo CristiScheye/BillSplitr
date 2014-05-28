@@ -15,6 +15,14 @@ class Bill < ActiveRecord::Base
         .where("bill_shares.debtor_id = ? OR bills.lender_id = ?", uid, uid)
   end
 
+  def self.between_users(user_id1, user_id2)
+    Bill.includes(:bill_shares)
+        .where("(lender_id = ? AND bill_shares.debtor_id = ?)
+        OR (lender_id = ? AND bill_shares.debtor_id = ?)",
+        user_id1, user_id2, user_id2, user_id1)
+        .references(:bill_shares)
+  end
+
   def amount_not_charged
     amount_charged = bill_shares.sum(:amount)
     self.amount - amount_charged
