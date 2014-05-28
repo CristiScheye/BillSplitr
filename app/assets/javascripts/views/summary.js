@@ -41,9 +41,7 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
 
   toggleCollapse: function (userId) {
     debugger;
-    _(this.$el.find('.bill-history')).forEach(function(el){
-      $(el).collapse('hide');
-    })
+    this.$el.find('.bill-history').collapse('hide')
     this.$el.find('#bill-history-' + userId).collapse('show')
   },
 
