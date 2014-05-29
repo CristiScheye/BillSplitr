@@ -1,3 +1,5 @@
+<div id='edit-modal'></div>
+
 <h1>My Net Worth: $<%= totals.net %></h1>
 <h2>I Owe Friends $<%= totals.debt %></h2>
 <div class="container" id="top-accordian">
@@ -9,16 +11,15 @@
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) < 0) { %>
       <div class='row bills-index' data-index="<%= user.escape('id') %>">
-        <div class="col-xs-6">
-          <a data-toggle="collapse" data-parent="#top-accordion" href="#bill-history-<%= user.escape('id') %>">
-            <%= user.escape('f_name') %> <%= user.escape('l_name') %>
-          </a>
+        <div class="col-xs-6" data-toggle="collapse" data-parent="#top-accordion" href="#bill-history-<%= user.escape('id') %>">
+          <%= user.escape('f_name') %> <%= user.escape('l_name') %>
         </div>
-        <div class='col-xs-3 neg-balance'>$ <%= user.escape('balance') %></div>
+        <div class='col-xs-3 neg-balance' id="user-balance-<%= user.id %>">$ <%= user.escape('balance') %></div>
         <div class='col-xs-3'>
           <button class='btn btn-xs btn-primary edit-balance'
                   data-id="<%= user.id %>"
-                  data-status='paid'>
+                  data-status='paid'
+                  data-receiver="<%= user.escape('id')%>">
             Settled
           </button>
         </div>
@@ -43,11 +44,12 @@
         <div class="col-xs-6" data-toggle="collapse" data-parent="#bottom-accordion" data-target="#bill-history-<%= user.escape('id') %>">
             <%= user.escape('f_name') %> <%= user.escape('l_name') %>
         </div>
-        <div class='col-xs-3 pos-balance'>$ <%= user.escape('balance') %></div>
+        <div class='col-xs-3 pos-balance' id="user-balance-<%= user.id %>">$ <%= user.escape('balance') %></div>
         <div class="col-xs-3">
           <button class='btn btn-xs btn-primary edit-balance'
                   data-id="<%= user.id %>"
-                  data-status='paid'>
+                  data-status='paid'
+                  data-sender="<%= user.escape('id') %>">
             Settled
           </button>
         </div>

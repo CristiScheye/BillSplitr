@@ -3,7 +3,7 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'sync', this.render)
   },
   events: {
-    'click .edit-balance' : 'editBalance',
+    'click .edit-balance' : 'confirmEditBalance',
     'click .bills-index' : 'toggleBillHistory'
   },
 
@@ -18,6 +18,29 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.attachSubviews();
     return this;
+  },
+
+  confirmEditBalance: function (event) {
+    debugger;
+    var senderId = $(event.target).attr('data-sender');
+    var receiverId = $(event.target).attr('data-receiver');
+
+    if (senderId) {
+      receiverId = BillSplit.currentUser.id;
+    } else {
+      senderId = BillSplit.currentUser.id;
+    }
+
+    var editModal = new BillSplit.Views.EditBalanceConfirmation({
+      senderId: senderId,
+      receiverId: receiverId,
+      balance: $(event.target).attr('data-amount'),
+      status: $(event.target).attr('data-status')
+    })
+
+    // if user selects 'OK', call editBalance(event)
+    // else do nothing
+    // close modal
   },
 
   editBalance: function (event) {
