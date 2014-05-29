@@ -3,18 +3,18 @@
 <table class="table table-condensed">
   <tr class="lender">
     <td><%= lender.escape('f_name') %> <%= lender.escape('l_name') %></td>
-    <td>$ <%= accounting.formatMoney(bill.escape('amount_not_charged')) %></td>
+    <td><%= accounting.formatMoney(bill.escape('amount_not_charged')) %></td>
   </tr>
   <% bill_shares.forEach(function(bill_share) { %>
     <tr>
       <td><%= bill_share.debtor().escape('email') %></td>
-      <td>$ <%= accounting.formatMoney(bill_share.escape('amount')) %></td>
+      <td><%= accounting.formatMoney(bill_share.escape('amount')) %></td>
     </tr>
   <% }) %>
 
   <tr class="total">
     <td>Total</td>
-    <td>$ <%= accounting.formatMoney(bill.escape('amount')) %></td>
+    <td><%= accounting.formatMoney(bill.escape('amount')) %></td>
   </tr>
 </table>
 

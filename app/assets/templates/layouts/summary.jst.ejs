@@ -1,7 +1,7 @@
 <div id='edit-modal'></div>
 
 <h1>My Net Worth: <%= accounting.formatMoney(totals.net) %></h1>
-<h2>I Owe Friends <%= accounting.formatMoney(totals.debt) %></h2>
+<h2>I Owe Friends <%= accounting.formatMoney(Math.abs(totals.debt)) %></h2>
 <div class="container" id="top-accordian">
   <div class="row">
     <div class="col-xs-6">Friend</div>
