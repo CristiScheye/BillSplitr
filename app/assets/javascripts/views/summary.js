@@ -5,7 +5,7 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
   },
   events: {
     'click button.edit-balance' : 'showModal',
-    'click .modal-dismiss' : 'closeModal',
+    'click #edit-modal-confirmation' : 'editBalance',
     'click .bills-index' : 'toggleBillHistory'
   },
 
@@ -25,32 +25,21 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
   showModal: function (event) {
     $('#editModal').on('show.bs.modal', function (e) {
       var btnData = $(event.target)
-      var senderId = btnData.attr('data-sender');
-      var receiverId = btnData.attr('data-receiver');
+      var userId = btnData.attr('data-user');
       var reqType = btnData.attr('data-status');
       var amt = Math.abs(parseFloat(btnData.attr('data-amt')));
 
-      if (senderId) {
-        receiverId = BillSplit.currentUser.id;
-      } else {
-        senderId = BillSplit.currentUser.id;
-      }
+      var otherUser = BillSplit.users.get(userId);
+      var currentUser = BillSplit.users.get(BillSplit.currentUser.id);
 
-      var sender = BillSplit.users.get(senderId);
-      var receiver = BillSplit.users.get(receiverId);
-      var bodyText = '';
-
-      $('#modal-sender-data').html(sender.escape('f_name') + ' ' + sender.escape('l_name'));
-      $('#modal-receiver-data').html(receiver.escape('f_name') + ' ' + receiver.escape('l_name'));
-      if (reqType === 'paid') {
-        $('#editModalLabel').html('Payment Confirmation')
-        bodyText += ' paid '
-      } else if (reqType === 'void'){
-        $('#editModalLabel').html('Void Confirmation')
-        bodyText += ' does NOT owe '
-      }
-      bodyText += accounting.formatMoney(amt) + ' to '
-      $('#modal-other-data').html(bodyText)
+      $('#modal-other-user-data').html(otherUser.escape('f_name') + ' ' + otherUser.escape('l_name'));
+      $('#modal-current-user-data').html(currentUser.escape('f_name') + ' ' + currentUser.escape('l_name'));
+      $('#modal-amount-data').html(accounting.formatMoney(amt))
+      // add info to confirmation for editBalance params
+      $('#edit-modal-confirmation').attr({
+        'data-id': userId,
+        'data-status': 'paid'
+      })
     })
 
     $('#editModal').modal('show');
@@ -58,6 +47,10 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
 
   editBalance: function (event) {
     event.preventDefault();
+    $('#editModal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+
     var view = this;
     var userId = $(event.target).attr('data-id');
     var status = $(event.target).attr('data-status')
@@ -76,7 +69,6 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
   },
 
   toggleBillHistory: function (event) {
-    debugger;
     var userId = $(event.currentTarget).attr('data-index');
     var subs = this.subviews('#bill-history-' + userId);
     if (subs.length === 0) {
