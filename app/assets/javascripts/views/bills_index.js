@@ -13,5 +13,5 @@ window.BillSplit.Views.BillsIndex = Backbone.View.extend({
 
     this.$el.html(content);
     return this;
-  }
+  }  
 })

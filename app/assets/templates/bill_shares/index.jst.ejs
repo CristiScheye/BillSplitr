@@ -1,3 +1,21 @@
+<div id="editModal2" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3><span id="modal2-amount-data"></span> Balance is <span class="modal2-status-data"></span></h3>
+        The <span id="modal2-amount-data"></span> charge from <strong id="modal2-lender-data"></strong>
+        to <strong id="modal2-debtor-data"></strong>
+        <br>for <span id="modal2-description-data"></span>
+        is now <strong class="modal2-status-data"></strong>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+        <button class="btn btn-primary" id="edit-modal2-confirmation">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col-xs-2">Date of Bill</div>
@@ -19,12 +37,22 @@
         <% if (bill_share.escape('status') === 'active') { %>
           <button class='btn btn-xs btn-success edit-share'
                   data-id="<%= bill_share.id %>"
-                  data-status='paid'>
+                  data-status='paid'
+                  data-lender="<%= bill_share.lender().id %>"
+                  data-debtor="<%= bill_share.debtor().id %>"
+                  data-amt="<%= bill_share.escape('amount') %>"
+                  data-description="<%= bill_share.bill().escape('description') %>"
+                  >
             Paid
           </button>
           <button class='btn btn-xs btn-warning edit-share'
                   data-id="<%= bill_share.id %>"
-                  data-status='void'>
+                  data-status='void'
+                  data-lender="<%= bill_share.lender().id %>"
+                  data-debtor="<%= bill_share.debtor().id %>"
+                  data-amt="<%= bill_share.escape('amount') %>"
+                  data-description="<%= bill_share.bill().escape('description')%>"
+                  >
             Void
           </button>
         <% } else { %>

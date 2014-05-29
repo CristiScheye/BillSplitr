@@ -1,17 +1,13 @@
 <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="editModalLabel">Balance Update</h4>
-      </div>
+
       <div class="modal-body">
-        <span id="modal-sender-data"></span>
-        <span id="modal-other-data"></span>
-        <span id="modal-receiver-data"></span>
+        <h3><span id="modal-amount-data"></span> balance is settled between:</h3>
+        <strong id="modal-current-user-data"></strong> and <strong id="modal-other-user-data"></strong>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-default modal-dismiss" data-dismiss="modal">Close</a>
+        <a class="btn btn-default" data-dismiss="modal">Cancel</a>
         <button class="btn btn-primary" id="edit-modal-confirmation">Confirm</button>
       </div>
     </div>
@@ -45,8 +41,7 @@
 
           <div class="col-xs-3">
             <button class="btn btn-xs btn-primary edit-balance"
-                    data-status="paid"
-                    data-receiver="<%= user.id%>"
+                    data-user="<%= user.id%>"
                     data-amt="<%= user.escape('balance') %>"
                     >
               Settled
@@ -79,8 +74,7 @@
           <div class='col-xs-3 pos-balance' id="user-balance-<%= user.id %>"><%= accounting.formatMoney(user.escape('balance')) %></div>
           <div class="col-xs-3">
             <button class="btn btn-xs btn-primary edit-balance"
-                    data-status="paid"
-                    data-sender="<%= user.id %>"
+                    data-user="<%= user.id %>"
                     data-amt="<%= user.escape('balance') %>"
                     >
               Settled
