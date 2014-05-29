@@ -2,15 +2,14 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.shareCount = 0;
     this.shareType = 'split-even'
-    this.listenTo(this.collection, 'invalid', this.errorMsg)
+    this.listenTo(this.collection, 'invalid', this.errorMsg);
+    this.listenTo(BillSplit.users, 'sync', this.render)
 
-    this.users = options.users;
-    this.users.fetch();
+    BillSplit.users.fetch();
   },
 
   events: {
     'submit form#new-bill' : 'submitBill',
-    'click #add-share-form' : 'addShareForm',
     'focus #bill-date' : 'displayCalendar',
     'click #share-type' : 'toggleAmountField',
     'focusout #bill_amount' : 'formatAmountFields',
@@ -20,7 +19,9 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
 
   render: function () {
     var that = this;
-    var content = this.template();
+    var content = this.template({
+      users: BillSplit.users
+    });
     this.$el.html(content);
     this.attachSubviews();
 
@@ -29,13 +30,20 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   displayShareForm: function (event) {
+    var view = this;
     this.$el.find('#bill-share-form').show();
-    this.addShareForm();
+
+    this.$el.find('.chosen-select').chosen({
+      width: "30%",
+    }).change(this.addShareForm.bind(view));
   },
 
   addShareForm: function (event) {
+    debugger;
+    var userId = $('select').val();
+    var user = BillSplit.users.get(userId);
     var newBillShare = new BillSplit.Views.NewBillShare({
-      users: this.users,
+      user: user,
       count: this.shareCount,
     });
     this.shareCount += 1
@@ -86,7 +94,6 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
 
   toggleAmountField: function (event, ui) {
     debugger;
-    //should make the clicked one active and its sibline inactive
     var $billType = $(event.target)
     $billType.addClass('active')
     $billType.siblings().removeClass('active')

@@ -20,7 +20,6 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
   },
 
   new: function () {
-    debugger;
     var bills = BillSplit.bills
     var users = BillSplit.users
 
