@@ -13,7 +13,7 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     'click #add-share-form' : 'addShareForm',
     'focus #bill-date' : 'displayCalendar',
     'click ul#share-type' : 'toggleAmountField',
-    'focusout #bill_amount' : 'calculateEvenSplit'
+    'focusout #bill_amount' : 'calculateEvenSplit',
   },
 
   template: JST['bills/new'],
@@ -97,13 +97,14 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   toggleAmountField: function (event, ui) {
     $(event.currentTarget).find('li').toggleClass('active')
     this.shareType = $(event.target).attr('data-id')
-    this.formatAmountFields();
   },
 
   calculateEvenSplit: function () {
     var $shareAmounts = this.$el.find('.split-even');
     var $total = this.$el.find('#bill_amount');
-    var subTotals = (parseFloat($total.val()) / (this.shareCount + 1)) || 0
+    var totalVal = accounting.formatNumber($total.val(), 2, '');
+    $total.val(totalVal)
+    var subTotals = accounting.formatNumber((totalVal / (this.shareCount + 1)), 2, '') || 0
     $shareAmounts.val(subTotals);
-  }
+  },
 });

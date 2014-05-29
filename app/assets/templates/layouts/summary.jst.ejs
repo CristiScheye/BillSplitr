@@ -1,7 +1,7 @@
 <div id='edit-modal'></div>
 
-<h1>My Net Worth: $<%= totals.net %></h1>
-<h2>I Owe Friends $<%= totals.debt %></h2>
+<h1>My Net Worth: <%= accounting.formatMoney(totals.net) %></h1>
+<h2>I Owe Friends <%= accounting.formatMoney(totals.debt) %></h2>
 <div class="container" id="top-accordian">
   <div class="row">
     <div class="col-xs-6">Friend</div>
@@ -14,7 +14,7 @@
         <div class="col-xs-6" data-toggle="collapse" data-parent="#top-accordion" href="#bill-history-<%= user.escape('id') %>">
           <%= user.escape('f_name') %> <%= user.escape('l_name') %>
         </div>
-        <div class='col-xs-3 neg-balance' id="user-balance-<%= user.id %>">$ <%= user.escape('balance') %></div>
+        <div class='col-xs-3 neg-balance' id="user-balance-<%= user.id %>"><%= accounting.formatMoney(user.escape('balance')) %></div>
         <div class='col-xs-3'>
           <button class='btn btn-xs btn-primary edit-balance'
                   data-id="<%= user.id %>"
@@ -29,7 +29,7 @@
   <% }) %>
 </div>
 
-<h2>Friends Owe Me $<%= totals.credit %></h2>
+<h2>Friends Owe Me <%= accounting.formatMoney(totals.credit) %></h2>
 
 <div class="container">
   <div id="bottom-accordion">
@@ -44,7 +44,7 @@
         <div class="col-xs-6" data-toggle="collapse" data-parent="#bottom-accordion" data-target="#bill-history-<%= user.escape('id') %>">
             <%= user.escape('f_name') %> <%= user.escape('l_name') %>
         </div>
-        <div class='col-xs-3 pos-balance' id="user-balance-<%= user.id %>">$ <%= user.escape('balance') %></div>
+        <div class='col-xs-3 pos-balance' id="user-balance-<%= user.id %>"><%= accounting.formatMoney(user.escape('balance')) %></div>
         <div class="col-xs-3">
           <button class='btn btn-xs btn-primary edit-balance'
                   data-id="<%= user.id %>"
@@ -54,7 +54,7 @@
           </button>
         </div>
       </div>
-      <div id='bill-history-<%= user.escape('id') %>' class='bill-history collapse'>asdf</div>
+      <div id='bill-history-<%= user.escape('id') %>' class='bill-history collapse'></div>
     <% } %>
   <% }) %>
 </div>

@@ -11,7 +11,7 @@
         <%= bill_share.lender().escape('f_name') + ' ' + bill_share.lender().escape('l_name') %>
         <small>charged</small>
         <%= bill_share.debtor().escape('f_name') + ' ' + bill_share.debtor().escape('l_name') + ' '%>
-        <%= '$' + bill_share.escape('amount') + ' '%>
+        <%= accounting.formatMoney(bill_share.escape('amount')) + ' '%>
         <small>for</small>
         <%= bill_share.bill().escape('description') %>
       </div>
