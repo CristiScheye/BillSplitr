@@ -3,8 +3,15 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'sync', this.render)
   },
   events: {
-    'click .edit-balance' : 'confirmEditBalance',
-    'click .bills-index' : 'toggleBillHistory'
+    'click button.edit-balance' : 'showModal',
+    'click .bills-index' : 'toggleBillHistory',
+    'click .modal-dismiss' : 'closeModal',
+    'click button.small-modal-show' : 'temp'
+  },
+
+  temp: function (event) {
+    debugger;
+    $('#myWeeModal').modal('show');
   },
 
   template: JST['layouts/summary'],
@@ -17,30 +24,38 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     this.attachSubviews();
+
+    debugger;
     return this;
   },
 
-  confirmEditBalance: function (event) {
-    debugger;
-    var senderId = $(event.target).attr('data-sender');
-    var receiverId = $(event.target).attr('data-receiver');
-
-    if (senderId) {
-      receiverId = BillSplit.currentUser.id;
-    } else {
-      senderId = BillSplit.currentUser.id;
-    }
-
-    var editModal = new BillSplit.Views.EditBalanceConfirmation({
-      senderId: senderId,
-      receiverId: receiverId,
-      balance: $(event.target).attr('data-amount'),
-      status: $(event.target).attr('data-status')
-    })
+  showModal: function (event) {
+    $('#editModal').modal('show');
+    // var senderId = $(event.target).attr('data-sender');
+    // var receiverId = $(event.target).attr('data-receiver');
+    //
+    // if (senderId) {
+    //   receiverId = BillSplit.currentUser.id;
+    // } else {
+    //   senderId = BillSplit.currentUser.id;
+    // }
+    //
+    // var editModal = new BillSplit.Views.EditBalanceConfirmation({
+    //   senderId: senderId,
+    //   receiverId: receiverId,
+    //   balance: $(event.target).attr('data-amount'),
+    //   status: $(event.target).attr('data-status')
+    // })
 
     // if user selects 'OK', call editBalance(event)
     // else do nothing
     // close modal
+  },
+
+  closeModal: function (event) {
+    debugger;
+    event.preventDefault();
+    alert('closing modal!');
   },
 
   editBalance: function (event) {

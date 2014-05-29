@@ -1,4 +1,21 @@
-<div id='edit-modal'></div>
+<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="editModalLabel">Confirm</h4>
+      </div>
+      <div class="modal-body">
+        Hello, Modal!
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default modal-dismiss" data-dismiss="modal">Close</a>
+        <button class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <h1>My Net Worth: <%= accounting.formatMoney(totals.net) %></h1>
 <h2>I Owe Friends <%= accounting.formatMoney(Math.abs(totals.debt)) %></h2>
@@ -10,29 +27,37 @@
   </div>
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) < 0) { %>
-      <div class='row bills-index' data-index="<%= user.escape('id') %>">
-        <div class="col-xs-6" data-toggle="collapse" data-parent="#top-accordion" href="#bill-history-<%= user.escape('id') %>">
+      <div class='row' >
+        <div class="col-xs-6 bills-index"
+              data-index="<%= user.id %>"
+              data-toggle="collapse"
+              data-parent="#top-accordion"
+              href="#bill-history-<%= user.id %>">
           <%= user.escape('f_name') %> <%= user.escape('l_name') %>
         </div>
-        <div class='col-xs-3 neg-balance' id="user-balance-<%= user.id %>"><%= accounting.formatMoney(user.escape('balance')) %></div>
-        <div class='col-xs-3'>
-          <button class='btn btn-xs btn-primary edit-balance'
+
+        <div class='col-xs-3 neg-balance' id="user-balance-<%= user.id %>">
+          <%= accounting.formatMoney(user.escape('balance')) %>
+        </div>
+
+        <div class="col-xs-3">
+          <button class="btn btn-xs btn-primary edit-balance"
                   data-id="<%= user.id %>"
-                  data-status='paid'
-                  data-receiver="<%= user.escape('id')%>">
+                  data-status="paid"
+                  data-receiver="<%= user.escape('id')%>"
+                  >
             Settled
           </button>
         </div>
       </div>
-      <div id='bill-history-<%= user.escape('id') %>' class='bill-history collapse'></div>
+      <div id="bill-history-<%= user.escape('id') %>" class='bill-history collapse'></div>
     <% } %>
   <% }) %>
 </div>
 
 <h2>Friends Owe Me <%= accounting.formatMoney(totals.credit) %></h2>
 
-<div class="container">
-  <div id="bottom-accordion">
+<div class="container" id="bottom-accordion">
   <div class="row">
     <div class="col-xs-6">Friend</div>
     <div class="col-xs-3">Balance</div>
@@ -40,21 +65,25 @@
   </div>
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) > 0) { %>
-      <div class="row bills-index" data-index="<%= user.escape('id') %>">
-        <div class="col-xs-6" data-toggle="collapse" data-parent="#bottom-accordion" data-target="#bill-history-<%= user.escape('id') %>">
+      <div class="row">
+        <div class="col-xs-6 bills-index"
+              data-index="<%= user.escape('id') %>"
+              data-toggle="collapse"
+              data-parent="#bottom-accordion"
+              data-target="#bill-history-<%= user.escape('id') %>">
             <%= user.escape('f_name') %> <%= user.escape('l_name') %>
         </div>
         <div class='col-xs-3 pos-balance' id="user-balance-<%= user.id %>"><%= accounting.formatMoney(user.escape('balance')) %></div>
         <div class="col-xs-3">
-          <button class='btn btn-xs btn-primary edit-balance'
+          <button class="btn btn-xs btn-primary edit-balance"
                   data-id="<%= user.id %>"
-                  data-status='paid'
+                  data-status="paid"
                   data-sender="<%= user.escape('id') %>">
             Settled
           </button>
         </div>
       </div>
-      <div id='bill-history-<%= user.escape('id') %>' class='bill-history collapse'></div>
+      <div id="bill-history-<%= user.escape('id') %>" class="bill-history" collapse></div>
     <% } %>
   <% }) %>
 </div>
