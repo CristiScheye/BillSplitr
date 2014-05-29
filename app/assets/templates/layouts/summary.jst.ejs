@@ -1,6 +1,6 @@
 <h1>My Net Worth: $<%= totals.net %></h1>
 <h2>I Owe Friends $<%= totals.debt %></h2>
-<div class="container">
+<div class="container" id="top-accordian">
   <div class="row">
     <div class="col-xs-6">Friend</div>
     <div class="col-xs-3">Balance</div>
@@ -10,7 +10,9 @@
     <% if (parseFloat(user.escape('balance')) < 0) { %>
       <div class='row bills-index' data-index="<%= user.escape('id') %>">
         <div class="col-xs-6">
-          <%= user.escape('f_name') %> <%= user.escape('l_name') %>
+          <a data-toggle="collapse" data-parent="#top-accordion" href="#bill-history-<%= user.escape('id') %>">
+            <%= user.escape('f_name') %> <%= user.escape('l_name') %>
+          </a>
         </div>
         <div class='col-xs-3 neg-balance'>$ <%= user.escape('balance') %></div>
         <div class='col-xs-3'>
@@ -21,7 +23,7 @@
           </button>
         </div>
       </div>
-      <div id='bill-history-<%= user.escape('id') %>' class='bill-history'></div>
+      <div id='bill-history-<%= user.escape('id') %>' class='bill-history collapse'></div>
     <% } %>
   <% }) %>
 </div>
@@ -29,6 +31,7 @@
 <h2>Friends Owe Me $<%= totals.credit %></h2>
 
 <div class="container">
+  <div id="bottom-accordion">
   <div class="row">
     <div class="col-xs-6">Friend</div>
     <div class="col-xs-3">Balance</div>
@@ -37,7 +40,9 @@
   <% userBalances.forEach(function(user) { %>
     <% if (parseFloat(user.escape('balance')) > 0) { %>
       <div class="row bills-index" data-index="<%= user.escape('id') %>">
-        <div class="col-xs-6"><%= user.escape('f_name') %> <%= user.escape('l_name') %></div>
+        <div class="col-xs-6" data-toggle="collapse" data-parent="#bottom-accordion" data-target="#bill-history-<%= user.escape('id') %>">
+            <%= user.escape('f_name') %> <%= user.escape('l_name') %>
+        </div>
         <div class='col-xs-3 pos-balance'>$ <%= user.escape('balance') %></div>
         <div class="col-xs-3">
           <button class='btn btn-xs btn-primary edit-balance'
@@ -47,7 +52,8 @@
           </button>
         </div>
       </div>
-      <div id='bill-history-<%= user.escape('id') %>' class='bill-history'></div>
+      <div id='bill-history-<%= user.escape('id') %>' class='bill-history collapse'>asdf</div>
     <% } %>
   <% }) %>
+</div>
 </div>

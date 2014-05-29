@@ -16,10 +16,10 @@ class Api::BillSharesController < Api::ApiController
     end
   end
 
-  def update_batch
-    # params[:user_id]
-    # bill shares between current user and params[:user_id]
-    # update_all to have status params[:status]
+  def batch_update
+    @bill_shares = BillShare.between_users(current_user.id, params[:user_id])
+    BillShare.where(id: @bill_shares.pluck(:id)).update_all(status: params[:status])
+    render :index
   end
 
   private

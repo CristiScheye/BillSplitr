@@ -22,32 +22,35 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
 
   editBalance: function (event) {
     event.preventDefault();
-    debugger;
+    var view = this;
+    var userId = $(event.target).attr('data-id');
+    var status = $(event.target).attr('data-status')
 
-
-
-    this.collection.fetch();
+    $.ajax({
+      type: 'POST',
+      url: 'api/update_balance',
+      data: {
+        user_id: userId,
+        status: status
+      },
+      success: function () {
+        view.collection.fetch();
+      }
+    })
   },
 
   toggleBillHistory: function (event) {
+    debugger;
     var userId = $(event.currentTarget).attr('data-index');
     var subs = this.subviews('#bill-history-' + userId);
     if (subs.length === 0) {
-      this.getBillHistory(userId, this.toggleCollapse)
-    } else{
-      this.toggleCollapse(userId);
+      this.addBillHistory(userId, this.toggleCollapse)
     }
   },
 
-  toggleCollapse: function (userId) {
-    debugger;
-    this.$el.find('.bill-history').collapse('hide')
-    this.$el.find('#bill-history-' + userId).collapse('show')
-  },
-
-  getBillHistory: function (userId, callback) {
+  addBillHistory: function (userId, callback) {
     var view = this;
-    var userId = userId
+    var userId = userId;
 
     var bill_shares = new BillSplit.Collections.BillShares();
     this.listenTo(bill_shares, 'sync', this.syncBalances)
@@ -60,7 +63,6 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
           collection: res
         });
         view.addSubview('#bill-history-' + userId, billsIndex);
-        callback.call(view, userId);
       }
     })
   },

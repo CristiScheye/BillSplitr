@@ -10,6 +10,7 @@ BillSplit::Application.routes.draw do
     resources :bill_shares, only: [:index, :create, :update]
 
     get '/dashboard', to: 'users#balances'
+    post '/update_balance', to: 'bill_shares#batch_update'
 
   end
 end
