@@ -17,6 +17,7 @@
 //= require backbone
 //= require serialize_json
 //= require accounting.min
+//= require chosen.jquery
 //= require bill_split
 //= require_tree ../templates
 //= require_tree ./models

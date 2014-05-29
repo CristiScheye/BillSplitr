@@ -4,6 +4,7 @@ window.BillSplit.Views.NewBillShare = Backbone.View.extend({
     this.users = options.users;
     this.listenTo(this.users, 'sync', this.render);
   },
+
   events: {
     'click .remove-billshare' : 'removeShareForm'
   },
@@ -16,6 +17,8 @@ window.BillSplit.Views.NewBillShare = Backbone.View.extend({
       count: this.count,
     });
     this.$el.html(content);
+    debugger;
+    this.$el.find('.chosen-select').chosen({ width: "30%" });
     return this;
   },
 

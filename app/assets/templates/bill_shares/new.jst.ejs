@@ -1,18 +1,17 @@
 <div class="row">
   <div class="col-xs-12">
-    <a id="remove-billshare-<%= count %>" class='btn btn-danger btn-xs remove-billshare'>X</a>
-    <label>Friend
-      <select class="form-control"
-              name="bill[bill_shares_attributes][<%= count %>][debtor_id]">
-        <option value=""></option>
-        <% users.forEach(function(user){ %>
-          <option value="<%= user.escape('id') %>">
-          <%= user.escape('email') %>
-          (<%= user.escape('f_name') %> <%= user.escape('l_name') %>)
-          </option>
-        <% }) %>
-      </select>
-    </label>
+    <select class="chosen-select"
+            name="bill[bill_shares_attributes][<%= count %>][debtor_id]"
+            data-placeholder="Select a friend..."
+            >
+      <option value=""></option>
+      <% users.forEach(function(user){ %>
+        <option value="<%= user.escape('id') %>">
+        <%= user.escape('email') %>
+        (<%= user.escape('f_name') %> <%= user.escape('l_name') %>)
+        </option>
+      <% }) %>
+    </select>
 
     <label>Amount
       <input type="text"
