@@ -12,8 +12,8 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     'submit form#new-bill' : 'submitBill',
     'click #add-share-form' : 'addShareForm',
     'focus #bill-date' : 'displayCalendar',
-    'click ul#share-type' : 'toggleAmountField',
-    'focusout #bill_amount' : 'calculateEvenSplit',
+    'click #share-type' : 'toggleAmountField',
+    'focusout #bill_amount' : 'formatAmountFields',
   },
 
   template: JST['bills/new'],
@@ -24,23 +24,13 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.attachSubviews();
 
-    var $slider = this.$el.find('#share-type-slider')
-    $slider.slider({
-      change: function (event, ui) {
-        that.toggleAmountField(event, ui);
-      },
-      stop: function (event, ui) {
-        //snaps to either side of the slide bar
-        if (ui.value < 50){
-          $slider.slider('value', 0);
-        } else {
-          $slider.slider('value', 100);
-        }
-        return false;
-      }
-    });
-
+    this.$el.find('#share-type').one('click', this.displayShareForm.bind(this))
     return this;
+  },
+
+  displayShareForm: function (event) {
+    this.$el.find('#bill-share-form').show();
+    this.addShareForm();
   },
 
   addShareForm: function (event) {
@@ -61,7 +51,7 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   displayCalendar: function (event) {
-    $(event.target).datepicker({ maxDate: 0 });
+    $(event.target).datepicker();
   },
 
   submitBill: function (event) {
@@ -95,8 +85,13 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   toggleAmountField: function (event, ui) {
-    $(event.currentTarget).find('li').toggleClass('active')
-    this.shareType = $(event.target).attr('data-id')
+    debugger;
+    //should make the clicked one active and its sibline inactive
+    var $billType = $(event.target)
+    $billType.addClass('active')
+    $billType.siblings().removeClass('active')
+    this.shareType = $billType.attr('data-id')
+    this.formatAmountFields()
   },
 
   calculateEvenSplit: function () {
