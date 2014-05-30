@@ -1,0 +1,48 @@
+h1.title {
+  font-size: 5em;
+  color: #f9fcf7;
+  /*text-align: left;*/
+}
+
+h2.title {
+  font-size: 3em;
+  color: #f9fcf7;
+}
+
+.login {
+  background-color: rgb(256,256,256);
+  background-color: rgba(256,256,256,0.7);
+  margin: 50px;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.login input {
+  width: 80%;
+}
+
+.login.btn {
+  width: inherit;
+  display: inline-block;
+  margin: 10px;
+  float: left;
+}
+
+#guest-login {
+  float: right;
+}
+
+img.landing {
+  /* Set up fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}

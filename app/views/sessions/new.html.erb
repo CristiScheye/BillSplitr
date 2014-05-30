@@ -1,28 +1,48 @@
+<%= image_tag "dinner.jpg", class: 'landing' %>
+
 <div class="row">
-  <div class="col-xs-6 col-xs-offset-3">
-    <h1>Log In</h1>
+  <div class="col-xs-12">
+    <h1 class="title">Bill Split</h1>
+    <h2 class="title">Split bills with friends</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3 login">
 
     <%= form_tag(controller: 'sessions', action: 'create') do %>
+      <fieldset>
+        <legend>Log In</legend>
 
-      <div class="form-group row">
-        <div class="col-xs-3">
-          <%= label_tag :email %>
+        <div class="form-group row">
+          <div class="col-xs-3">
+            <%= label_tag :email %>
+          </div>
+          <div class="col-xs-9">
+            <%= email_field_tag :email %>
+          </div>
         </div>
-        <div class="col-xs-9">
-          <%= email_field_tag :email %>
-        </div>
-      </div>
 
-      <div class="form-group row">
-        <div class="col-xs-3">
-          <%= label_tag :password %>
+        <div class="form-group row">
+          <div class="col-xs-3">
+            <%= label_tag :password %>
+          </div>
+          <div class="col-xs-9">
+            <%= password_field_tag :password %>
+          </div>
         </div>
-        <div class="col-xs-9">
-          <%= password_field_tag :password %>
-        </div>
-      </div>
-
-      <%= submit_tag "Log In", class: 'btn btn-primary' %>
+      </fieldset>
+      <%= submit_tag "Log In", class: 'btn btn-primary login' %>
     <% end %>
+      <%= button_to "Sign Up", new_user_url, class: 'btn btn-success login', method: 'get' %>
+      <%= button_to("Guest Login", {
+        controller: 'sessions',
+        action: 'create',
+        email: 'email@example.com',
+        password: 'password'},
+        {
+          class: 'btn btn-danger login',
+          id: 'guest-login'
+        }) %>
   </div>
 </div>
