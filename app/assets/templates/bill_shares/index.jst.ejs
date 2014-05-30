@@ -16,69 +16,73 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row info">
-    <div class="col-xs-2">Date</div>
-    <div class="col-xs-1">Amount</div>
-    <div class="col-xs-2">Status</div>
-    <div class="col-xs-6">Details</div>
+<div class="row">
+  <div class="col-xs-10">
+    <table class="table bill-share-table">
+      <tr class="active">
+        <td class="col-xs-2">Date</td>
+        <td class="col-xs-1">Amount</td>
+        <td class="col-xs-2">Status</td>
+        <td class="col-xs-6">Details</td>
+      </tr>
+      <% bill_shares.forEach(function(bill_share) { %>
+        <tr>
+          <td class="col-xs-2">
+            <%= bill_share.bill().escape('date') %>
+          </td>
+
+          <td class="col-xs-1">
+            <%= accounting.formatMoney(bill_share.escape('amount')) %>
+          </td>
+
+          <td class="col-xs-2">
+            <% if (bill_share.escape('status') === 'active') { %>
+              <button class='btn btn-xs btn-success edit-share'
+                      data-id="<%= bill_share.id %>"
+                      data-status='paid'
+                      data-lender="<%= bill_share.lender().id %>"
+                      data-debtor="<%= bill_share.debtor().id %>"
+                      data-amt="<%= bill_share.escape('amount') %>"
+                      data-description="<%= bill_share.bill().escape('description') %>"
+                      >
+                Paid
+              </button>
+              <button class='btn btn-xs btn-warning edit-share'
+                      data-id="<%= bill_share.id %>"
+                      data-status='void'
+                      data-lender="<%= bill_share.lender().id %>"
+                      data-debtor="<%= bill_share.debtor().id %>"
+                      data-amt="<%= bill_share.escape('amount') %>"
+                      data-description="<%= bill_share.bill().escape('description')%>"
+                      >
+                Void
+              </button>
+            <% } else { %>
+              <%= bill_share.escape('status') %>
+            <% } %>
+          </td>
+
+          <td class="col-xs-6">
+            <% if (bill_share.lender().escape('id') === BillSplit.currentUser.id) { %>
+              I
+            <% } else {%>
+              <%= bill_share.lender().escape('f_name') + ' ' + bill_share.lender().escape('l_name') %>
+            <% } %>
+
+            <small> charged </small>
+
+            <% if (bill_share.debtor().escape('id') === BillSplit.currentUser.id) { %>
+              Me
+            <% } else { %>
+              <%= bill_share.debtor().escape('f_name') + ' ' + bill_share.debtor().escape('l_name') + ' '%>
+            <% } %>
+
+            <small> for </small>
+            <%= bill_share.bill().escape('description')%>
+          </td>
+
+        </tr>
+      <% }) %>
+    </table>
   </div>
-  <% bill_shares.forEach(function(bill_share) { %>
-    <div class="row">
-      <div class="col-xs-2">
-        <%= bill_share.bill().escape('date') %>
-      </div>
-
-      <div class="col-xs-1">
-        <%= accounting.formatMoney(bill_share.escape('amount')) %>
-      </div>
-
-      <div class="col-xs-2">
-        <% if (bill_share.escape('status') === 'active') { %>
-          <button class='btn btn-xs btn-success edit-share'
-                  data-id="<%= bill_share.id %>"
-                  data-status='paid'
-                  data-lender="<%= bill_share.lender().id %>"
-                  data-debtor="<%= bill_share.debtor().id %>"
-                  data-amt="<%= bill_share.escape('amount') %>"
-                  data-description="<%= bill_share.bill().escape('description') %>"
-                  >
-            Paid
-          </button>
-          <button class='btn btn-xs btn-warning edit-share'
-                  data-id="<%= bill_share.id %>"
-                  data-status='void'
-                  data-lender="<%= bill_share.lender().id %>"
-                  data-debtor="<%= bill_share.debtor().id %>"
-                  data-amt="<%= bill_share.escape('amount') %>"
-                  data-description="<%= bill_share.bill().escape('description')%>"
-                  >
-            Void
-          </button>
-        <% } else { %>
-          <%= bill_share.escape('status') %>
-        <% } %>
-      </div>
-
-      <div class="col-xs-6">
-        <% if (bill_share.lender().escape('id') === BillSplit.currentUser.id) { %>
-          I
-        <% } else {%>
-          <%= bill_share.lender().escape('f_name') + ' ' + bill_share.lender().escape('l_name') %>
-        <% } %>
-
-        <small> charged </small>
-
-        <% if (bill_share.debtor().escape('id') === BillSplit.currentUser.id) { %>
-          Me
-        <% } else { %>
-          <%= bill_share.debtor().escape('f_name') + ' ' + bill_share.debtor().escape('l_name') + ' '%>
-        <% } %>
-
-        <small> for </small>
-        <%= bill_share.bill().escape('description')%>
-      </div>
-
-    </div>
-  <% }) %>
 </div>
