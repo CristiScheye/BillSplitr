@@ -1,4 +1,4 @@
-window.BillSplit.Views.NewBillShare = Backbone.View.extend({
+window.BillSplitr.Views.NewBillShare = Backbone.View.extend({
   initialize: function (options) {
     this.count = options.count;
     this.user = options.user;

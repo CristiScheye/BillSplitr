@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-BillSplit::Application.load_tasks
+BillSplitr::Application.load_tasks

@@ -1,14 +1,14 @@
-window.BillSplit = {
+window.BillSplitr = {
   Models: {},
   Collections: {},
   Views: {},
   Routers: {},
   initialize: function() {
     var $rootEl = $('#content');
-    this.bills = new BillSplit.Collections.Bills();
-    this.users = new BillSplit.Collections.Users();
+    this.bills = new BillSplitr.Collections.Bills();
+    this.users = new BillSplitr.Collections.Users();
 
-    this.router = new BillSplit.Routers.AppRouter({
+    this.router = new BillSplitr.Routers.AppRouter({
       $rootEl : $rootEl
     });
     Backbone.history.start();
@@ -16,7 +16,7 @@ window.BillSplit = {
 };
 
 $(document).ready(function(){
-    BillSplit.initialize();
+    BillSplitr.initialize();
   });
 
 Backbone.CompositeView = Backbone.View.extend({
@@ -90,7 +90,7 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   errorMsg: function (_view, errors) {
-    var errorView = new BillSplit.Views.Errors({
+    var errorView = new BillSplitr.Views.Errors({
       errors: errors
     });
     this.addSubview('#errors', errorView);

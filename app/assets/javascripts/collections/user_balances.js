@@ -1,6 +1,6 @@
-window.BillSplit.Collections.UserBalances = Backbone.Collection.extend({
+window.BillSplitr.Collections.UserBalances = Backbone.Collection.extend({
   url: 'api/dashboard',
-  model: BillSplit.Models.User,
+  model: BillSplitr.Models.User,
   currentUserTotals: function () {
     _totals = {
       debt: 0,

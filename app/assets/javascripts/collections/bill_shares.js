@@ -1,4 +1,4 @@
-window.BillSplit.Collections.BillShares = Backbone.Collection.extend({
-  model: BillSplit.Models.BillShare,
+window.BillSplitr.Collections.BillShares = Backbone.Collection.extend({
+  model: BillSplitr.Models.BillShare,
   url: 'api/bill_shares'
 })

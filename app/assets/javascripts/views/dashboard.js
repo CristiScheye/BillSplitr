@@ -1,11 +1,11 @@
-window.BillSplit.Views.Dashboard = Backbone.CompositeView.extend({
+window.BillSplitr.Views.Dashboard = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.userBalances = options.userBalances;
 
     this.listenTo(this.userBalances, 'sync', this.render);
-    this.listenTo(BillSplit.bills, 'sync', this.render);
+    this.listenTo(BillSplitr.bills, 'sync', this.render);
 
-    var summaryView = new BillSplit.Views.Summary({
+    var summaryView = new BillSplitr.Views.Summary({
       collection: this.userBalances
     });
     this.addSubview('#summary', summaryView);

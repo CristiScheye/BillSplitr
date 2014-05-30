@@ -1,3 +1,3 @@
-window.BillSplit.Models.User = Backbone.Model.extend({
+window.BillSplitr.Models.User = Backbone.Model.extend({
   urlRoot: 'api/users'
 })

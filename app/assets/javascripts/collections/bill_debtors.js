@@ -1,7 +1,7 @@
-window.BillSplit.Collections.BillDebtors = Backbone.Collection.extend({
+window.BillSplitr.Collections.BillDebtors = Backbone.Collection.extend({
   initialize: function (options) {
     this.bill = options.bill
   },
-  model: BillSplit.Models.User,
+  model: BillSplitr.Models.User,
   url: 'api/users'
 })

@@ -1,4 +1,4 @@
-window.BillSplit.Views.Errors = Backbone.View.extend({
+window.BillSplitr.Views.Errors = Backbone.View.extend({
   initialize: function (options) {
     this.errors = options.errors;
   },

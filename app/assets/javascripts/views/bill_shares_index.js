@@ -1,4 +1,4 @@
-window.BillSplit.Views.BillSharesIndex = Backbone.View.extend({
+window.BillSplitr.Views.BillSharesIndex = Backbone.View.extend({
   initialize: function (options) {
     this.listenTo(this.collection, 'sync' , this.render);
   },
@@ -44,8 +44,8 @@ window.BillSplit.Views.BillSharesIndex = Backbone.View.extend({
       var description = btnData.attr('data-description');
       var billShareId = btnData.attr('data-id')
 
-      var lender = BillSplit.users.get(lenderId);
-      var debtor = BillSplit.users.get(debtorId);
+      var lender = BillSplitr.users.get(lenderId);
+      var debtor = BillSplitr.users.get(debtorId);
       var glyph = 'glyphicon '
       if (status === 'paid') {
         glyph += 'glyphicon-ok';

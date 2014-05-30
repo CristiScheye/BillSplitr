@@ -1,4 +1,4 @@
-window.BillSplit.Views.BillShow = Backbone.View.extend({
+window.BillSplitr.Views.BillShow = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
   },

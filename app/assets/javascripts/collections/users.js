@@ -1,11 +1,11 @@
-window.BillSplit.Collections.Users = Backbone.Collection.extend({
-  model: BillSplit.Models.User,
+window.BillSplitr.Collections.Users = Backbone.Collection.extend({
+  model: BillSplitr.Models.User,
   url: 'api/users',
   getOrFetch: function (id) {
     var user = this.get(id);
 
     if (!user) {
-      user = new BillSplit.Models.User({ 'id' : id })
+      user = new BillSplitr.Models.User({ 'id' : id })
       this.add(user)
     }
 

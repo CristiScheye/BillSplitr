@@ -1,7 +1,7 @@
-window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
+window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.listenTo(this.collection, 'sync', this.render)
-    BillSplit.users.fetch();
+    BillSplitr.users.fetch();
   },
   events: {
     'click button.edit-balance' : 'showModal',
@@ -29,8 +29,8 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
       var reqType = btnData.attr('data-status');
       var amt = Math.abs(parseFloat(btnData.attr('data-amt')));
 
-      var otherUser = BillSplit.users.get(userId);
-      var currentUser = BillSplit.users.get(BillSplit.currentUser.id);
+      var otherUser = BillSplitr.users.get(userId);
+      var currentUser = BillSplitr.users.get(BillSplitr.currentUser.id);
 
       $('#modal-other-user-data').html(otherUser.escape('f_name') + ' ' + otherUser.escape('l_name'));
       $('#modal-current-user-data').html(currentUser.escape('f_name') + ' ' + currentUser.escape('l_name'));
@@ -80,14 +80,14 @@ window.BillSplit.Views.Summary = Backbone.CompositeView.extend({
     var view = this;
     var userId = userId;
 
-    var bill_shares = new BillSplit.Collections.BillShares();
+    var bill_shares = new BillSplitr.Collections.BillShares();
     this.listenTo(bill_shares, 'sync', this.syncBalances)
     bill_shares.fetch({
       data: {
         user_id: userId
       },
       success: function (res) {
-        var billsIndex = new BillSplit.Views.BillSharesIndex({
+        var billsIndex = new BillSplitr.Views.BillSharesIndex({
           collection: res
         });
         view.addSubview('#bill-history-' + userId, billsIndex);

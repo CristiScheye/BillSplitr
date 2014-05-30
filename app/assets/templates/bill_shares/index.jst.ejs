@@ -71,7 +71,7 @@
           </td>
 
           <td class="col-xs-6">
-            <% if (bill_share.lender().escape('id') === BillSplit.currentUser.id) { %>
+            <% if (bill_share.lender().escape('id') === BillSplitr.currentUser.id) { %>
               I
             <% } else {%>
               <%= bill_share.lender().escape('f_name') + ' ' + bill_share.lender().escape('l_name') %>
@@ -79,7 +79,7 @@
 
             <small> charged </small>
 
-            <% if (bill_share.debtor().escape('id') === BillSplit.currentUser.id) { %>
+            <% if (bill_share.debtor().escape('id') === BillSplitr.currentUser.id) { %>
               Me
             <% } else { %>
               <%= bill_share.debtor().escape('f_name') + ' ' + bill_share.debtor().escape('l_name') + ' '%>

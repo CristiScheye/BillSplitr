@@ -1,13 +1,13 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: BillSplit_development
+  database: BillSplitr_development
   pool: 5
   username:
   password:
 test:
   adapter: postgresql
   encoding: unicode
-  database: BillSplit_test
+  database: BillSplitr_test
   pool: 5
   username:
