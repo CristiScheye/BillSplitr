@@ -22,7 +22,7 @@
 
       <h1 class="text-primary">My Overall Balance  <%= accounting.formatMoney(totals.credit) %></h1>
 
-      <h2 class="text-danger div-title">I Owe Friends <%= accounting.formatMoney(totals.debt) %></h2>
+      <h2 class="text-danger div-title">I Owe Friends <%= accounting.formatMoney(Math.abs(totals.debt)) %></h2>
 
       <div id="top-accordian">
         <div class="bordered-table" id="neg-balance-table">
@@ -48,7 +48,7 @@
                       data-parent="#top-accordion"
                       data-target="#bill-history-<%= user.id %>"
                       id="user-balance-<%= user.id %>">
-                  <%= accounting.formatMoney(user.escape('balance')) %>
+                  <%= accounting.formatMoney(Math.abs(user.escape('balance'))) %>
                 </div>
 
                 <div class="col-xs-3">
