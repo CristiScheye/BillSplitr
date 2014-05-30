@@ -19,26 +19,12 @@
 
     <div class="col-xs-10 col-xs-offset-1">
 
-      <div class="row">
-        <div class="col-xs-8 col-xs-offset-1">
-          <h1 class="text-primary">My Overall Balance</h1>
-        </div>
-        <div class="col-xs-3">
-          <h1 class="text-primary"><%= accounting.formatMoney(totals.credit) %></h1>
-        </div>
-      </div>
+      <h1 class="text-primary">My Overall Balance  <%= accounting.formatMoney(totals.credit) %></h1>
 
-      <div class="row">
-        <div class="col-xs-6">
-          <h2 class="text-danger">I Owe Friends</h2>
-        </div>
-        <div class="col-xs-1">
-          <h2 class="text-danger"><%= accounting.formatMoney(totals.debt) %></h2>
-        </div>
-      </div>
+      <h2 class="text-danger div-title">I Owe Friends <%= accounting.formatMoney(totals.debt) %></h2>
 
       <div id="accordian">
-        <div class="balance-table">
+        <div class="bordered-table" id="neg-bordered-table">
           <div class="row balance-header-row">
             <div class="col-xs-6">Friend</div>
             <div class="col-xs-3">Balance</div>
@@ -73,16 +59,10 @@
           <% }) %>
         </div>
 
-        <div class="row">
-          <div class="col-xs-6">
-            <h2 class="text-success">Friends Owe Me</h2>
-          </div>
-          <div class="col-xs-1">
-            <h2 class="text-success"><%= accounting.formatMoney(totals.credit) %></h2>
-          </div>
-        </div>
 
-        <div class="balance-table">
+        <h2 class="text-success div-title">Friends Owe Me <%= accounting.formatMoney(totals.credit) %></h2>
+        <div class="bordered-table" id="pos-balance-table">
+
           <div class="row balance-header-row">
             <div class="col-xs-6">Friend</div>
             <div class="col-xs-3">Balance</div>

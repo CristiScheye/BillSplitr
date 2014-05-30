@@ -12,18 +12,36 @@ div.bills-index {
   margin: 10px;
 }
 
-.balance-table {
+.div-title {
+  position: relative;
+  top: 30px;
+  background: white;
+  display: inline;
+}
+
+.bordered-table {
   margin: 10px;
-  padding: 10px;
+  padding: 30px;
+  border: solid;
+}
+
+#pos-balance-table {
+  border: solid #3fad46;
+}
+
+#neg-balance-table {
+  border:  solid #d9534f;
 }
 
 .balance-header-row {
   background: #ecf0f1;
+  padding: 5px;
+  padding-top: 8px;
 }
 
 .user-balance-row {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding: 5px;
+  padding-top: 8px;
 }
 
 .user-balance-row:hover {
