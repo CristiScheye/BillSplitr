@@ -86,7 +86,9 @@
             <% } %>
 
             <small> for </small>
-            <%= bill_share.bill().escape('description')%>
+            <a href="#/bills/<%= bill_share.bill().escape('id') %>">
+              <%= bill_share.bill().escape('description')%>
+            </a>
           </td>
 
         </tr>
