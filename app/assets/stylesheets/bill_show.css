@@ -1,8 +1,11 @@
-tr.lender {
+.total {
   font-weight: bold;
+  font-size: 1.25em;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: thin solid black;
 }
 
-tr.total {
-  font-weight: bold;
-  font-size: 1.3em;
+.bill-show {
+  margin: 30px;
 }

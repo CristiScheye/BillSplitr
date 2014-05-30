@@ -1,21 +1,50 @@
-<h2><%= bill.escape('description') %></h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
 
-<table class="table table-condensed">
-  <tr class="lender">
-    <td><%= lender.escape('f_name') %> <%= lender.escape('l_name') %></td>
-    <td><%= accounting.formatMoney(bill.escape('amount_not_charged')) %></td>
-  </tr>
-  <% bill_shares.forEach(function(bill_share) { %>
-    <tr>
-      <td><%= bill_share.debtor().escape('email') %></td>
-      <td><%= accounting.formatMoney(bill_share.escape('amount')) %></td>
-    </tr>
-  <% }) %>
+      <h1 class="div-title"><%= bill.escape('description') %></h1>
 
-  <tr class="total">
-    <td>Total</td>
-    <td><%= accounting.formatMoney(bill.escape('amount')) %></td>
-  </tr>
-</table>
+      <div class="bordered-table">
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>Date: <%= bill.escape('date') %></h4>
+            <h4>Posted By: <%= lender.escape('f_name') + ' ' + lender.escape('l_name') %></h4>
+          </div>
+        </div>
 
-<div id='new-bill-share'></div>
+        <br>
+
+        <div class="row lender">
+          <div class="col-xs-8">
+            <%= lender.escape('f_name') + ' '
+                + lender.escape('l_name') + ' '
+                + '(' + lender.escape('email') + ')' %>
+          </div>
+          <div class="col-xs-4">
+            <%= accounting.formatMoney(bill.escape('amount_not_charged')) %>
+          </div>
+        </div>
+
+        <% bill_shares.forEach(function(bill_share) { %>
+          <div class="row">
+            <div class="col-xs-8">
+              <%= bill_share.debtor().escape('f_name') + ' '
+                  + bill_share.debtor().escape('l_name') + ' '
+                  + '(' + bill_share.debtor().escape('email') + ')'  %>
+            </div>
+            <div class="col-xs-4">
+              <%= accounting.formatMoney(bill_share.escape('amount')) %>
+            </div>
+          </div>
+        <% }) %>
+
+        <div class="row ">
+          <div class="col-xs-8 total">Total</div>
+          <div class="col-xs-4 total"><%= accounting.formatMoney(bill.escape('amount')) %></div>
+        </div>
+      </div>
+
+      <div id='new-bill-share'></div>
+    </div>
+  </div>
+</div>

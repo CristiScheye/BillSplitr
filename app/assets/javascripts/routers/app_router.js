@@ -31,12 +31,11 @@ window.BillSplit.Routers.AppRouter = Backbone.Router.extend({
   },
 
   show: function (id) {
+    BillSplit.bills.fetch()
     var bill = BillSplit.bills.getOrFetch(id)
-    var users = BillSplit.users;
-    users.fetch();
 
     var billShow = new BillSplit.Views.BillShow({
-      collection: this.bills,
+      collection: BillSplit.bills,
       model: bill
     });
 

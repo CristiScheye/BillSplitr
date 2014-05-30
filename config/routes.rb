@@ -6,7 +6,7 @@ BillSplit::Application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:index, :show]
-    resources :bills, only: [:index, :create]
+    resources :bills, only: [:index, :create, :show]
     resources :bill_shares, only: [:index, :create, :update]
 
     get '/dashboard', to: 'users#balances'

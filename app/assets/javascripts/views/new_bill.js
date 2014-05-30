@@ -59,6 +59,7 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   removeShareForm: function (shareForm) {
+    debugger;
     this.shareCount -= 1;
     this.removeSubview('#new-bill-share', shareForm);
     this.formatAmountFields();
