@@ -14,11 +14,13 @@
   </div>
 
   <div class="navbar-responsive-collapse navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-left">
       <li>
-        <%= link_to '+ New Bill', '/#/bills/new' %>
+        <%= link_to "+ New Bill", '/#/bills/new' %>
       </li>
+    </ul>
 
+    <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <%= "#{current_user.f_name} #{current_user.l_name}" %>
@@ -29,8 +31,8 @@
             <%= link_to "Log Out", session_url, method: :delete %>
           </li>
         </ul>
-      </li>
-    </ul> <!-- dropdown -->
+      </li> <!-- dropdown -->
+    </ul>
 
   </div>
 </div>
