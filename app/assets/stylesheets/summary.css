@@ -12,19 +12,6 @@ div.bills-index {
   margin: 10px;
 }
 
-.div-title {
-  position: relative;
-  top: 30px;
-  background: white;
-  display: inline;
-}
-
-.bordered-table {
-  margin: 10px;
-  padding: 30px;
-  border: solid;
-}
-
 #pos-balance-table {
   border: solid #3fad46;
 }

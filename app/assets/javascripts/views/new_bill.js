@@ -36,10 +36,16 @@ window.BillSplit.Views.NewBill = Backbone.CompositeView.extend({
     this.$el.find('.chosen-select').chosen({
       width: "30%",
     }).change(this.addShareForm.bind(view));
+
+    this.$el.find('.chosen-select').one('change', this.displaySubmit.bind(this));
+  },
+
+  displaySubmit: function () {
+    debugger;
+    this.$el.find('#bill-submit').show();
   },
 
   addShareForm: function (event) {
-    debugger;
     var userId = $('select').val();
     var user = BillSplit.users.get(userId);
     var newBillShare = new BillSplit.Views.NewBillShare({

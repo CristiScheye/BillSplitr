@@ -39,21 +39,30 @@ window.BillSplit.Views.BillSharesIndex = Backbone.View.extend({
       var btnData = $(event.target)
       var lenderId = btnData.attr('data-lender');
       var debtorId = btnData.attr('data-debtor');
-      var reqType = btnData.attr('data-status');
+      var status = btnData.attr('data-status');
       var amt = Math.abs(parseFloat(btnData.attr('data-amt')));
-      var billShareId = btnData.attr('data-id');
+      var description = btnData.attr('data-description');
+      var billShareId = btnData.attr('data-id')
 
       var lender = BillSplit.users.get(lenderId);
       var debtor = BillSplit.users.get(debtorId);
-
+      var glyph = 'glyphicon '
+      if (status === 'paid') {
+        glyph += 'glyphicon-ok';
+      } else {
+        glyph = 'glyphicon-remove';
+      }
+      debugger;
+      $('#modal2-glyphicon').addClass(glyph)
       $('#modal2-lender-data').html(lender.escape('f_name') + ' ' + lender.escape('l_name'));
       $('#modal2-debtor-data').html(debtor.escape('f_name') + ' ' + debtor.escape('l_name'));
-      $('#modal2-amount-data').html(accounting.formatMoney(amt));
-      $('.modal2-status-data').html(reqType);
+      $('.modal2-amount-data').html(accounting.formatMoney(amt));
+      $('.modal2-status-data').html(status);
+      $('#modal2-description-data').html(description)
 
       $('#edit-modal2-confirmation').attr({
         'data-id': billShareId,
-        'data-status' :reqType
+        'data-status' :status
       })
     })
 

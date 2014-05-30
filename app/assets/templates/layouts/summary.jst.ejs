@@ -1,10 +1,11 @@
 <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <div class="modal-header">
+        <h3><span class="glyphicon glyphicon-ok"></span> Balance Settled <span id="modal-amount-data"></span></h3>
+      </div>
       <div class="modal-body">
-        <h3><span id="modal-amount-data"></span> balance is settled between:</h3>
-        <strong id="modal-current-user-data"></strong> and <strong id="modal-other-user-data"></strong>
+        Between <strong>You</strong> and <strong id="modal-other-user-data"></strong>
       </div>
       <div class="modal-footer">
         <a class="btn btn-default" data-dismiss="modal">Cancel</a>
@@ -23,8 +24,8 @@
 
       <h2 class="text-danger div-title">I Owe Friends <%= accounting.formatMoney(totals.debt) %></h2>
 
-      <div id="accordian">
-        <div class="bordered-table" id="neg-bordered-table">
+      <div id="top-accordian">
+        <div class="bordered-table" id="neg-balance-table">
           <div class="row balance-header-row">
             <div class="col-xs-6">Friend</div>
             <div class="col-xs-3">Balance</div>
@@ -36,12 +37,17 @@
                 <div class="col-xs-6 bills-index"
                       data-index="<%= user.id %>"
                       data-toggle="collapse"
-                      data-parent="#accordion"
+                      data-parent="#top-accordion"
                       data-target="#bill-history-<%= user.id %>">
                   <%= user.escape('f_name') %> <%= user.escape('l_name') %>
                 </div>
 
-                <div class='col-xs-3 neg-balance' id="user-balance-<%= user.id %>">
+                <div class='col-xs-3 neg-balance bills-index'
+                      data-index="<%= user.id %>"
+                      data-toggle="collapse"
+                      data-parent="#top-accordion"
+                      data-target="#bill-history-<%= user.id %>"
+                      id="user-balance-<%= user.id %>">
                   <%= accounting.formatMoney(user.escape('balance')) %>
                 </div>
 
@@ -58,8 +64,9 @@
             <% } %>
           <% }) %>
         </div>
+      </div><!-- top-accordian -->
 
-
+      <div id="bottom-accordian">
         <h2 class="text-success div-title">Friends Owe Me <%= accounting.formatMoney(totals.credit) %></h2>
         <div class="bordered-table" id="pos-balance-table">
 
@@ -74,11 +81,18 @@
                 <div class="col-xs-6 bills-index"
                       data-index="<%= user.id %>"
                       data-toggle="collapse"
-                      data-parent="#accordion"
+                      data-parent="#bottom-accordion"
                       data-target="#bill-history-<%= user.id %>">
                     <%= user.escape('f_name') %> <%= user.escape('l_name') %>
                 </div>
-                <div class='col-xs-3 pos-balance' id="user-balance-<%= user.id %>"><%= accounting.formatMoney(user.escape('balance')) %></div>
+                <div class='col-xs-3 pos-balance bills-index'
+                      data-index="<%= user.id %>"
+                      data-toggle="collapse"
+                      data-parent="#bottom-accordion"
+                      data-target="#bill-history-<%= user.id %>"
+                      id="user-balance-<%= user.id %>">
+                  <%= accounting.formatMoney(user.escape('balance')) %>
+                </div>
                 <div class="col-xs-3">
                   <button class="btn btn-xs btn-primary edit-balance"
                           data-user="<%= user.id %>"
