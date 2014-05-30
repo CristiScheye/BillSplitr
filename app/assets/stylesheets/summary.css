@@ -3,3 +3,7 @@
   display: inline-block;
   margin: 15px;
 }
+
+div.bills-index {
+  cursor: pointer;
+}

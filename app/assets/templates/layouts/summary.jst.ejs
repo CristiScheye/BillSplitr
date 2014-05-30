@@ -15,8 +15,8 @@
 </div>
 
 
-<h1>My Net Worth: <%= accounting.formatMoney(totals.net) %></h1>
-<h2>I Owe Friends <%= accounting.formatMoney(Math.abs(totals.debt)) %></h2>
+<h1 class="text-primary">My Overall Balance: <%= accounting.formatMoney(totals.net) %></h1>
+<h2 class="text-danger">I Owe Friends <%= accounting.formatMoney(Math.abs(totals.debt)) %></h2>
 <div id="accordian">
   <div class="container">
     <div class="row">
@@ -53,7 +53,7 @@
     <% }) %>
   </div>
 
-  <h2>Friends Owe Me <%= accounting.formatMoney(totals.credit) %></h2>
+  <h2 class="text-success">Friends Owe Me <%= accounting.formatMoney(totals.credit) %></h2>
 
   <div class="container">
     <div class="row">
