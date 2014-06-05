@@ -9,6 +9,7 @@
 
 <div class="row">
   <div class="col-xs-6 col-xs-offset-3 login">
+  <%= render('layouts/errors') if flash[:errors]  %>
 
     <%= form_tag(controller: 'sessions', action: 'create') do %>
       <fieldset>
