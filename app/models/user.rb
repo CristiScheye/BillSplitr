@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   has_many :bill_share_debts, class_name: 'BillShare', foreign_key: 'debtor_id'
   has_many :bill_debts, through: :bill_share_debts, source: :bill
 
+  has_many :recieved_friendships, class_name: 'Friendship', foreign_key: :friend_id
+
+  has_many :friendships, foreign_key: :user_id
+  has_many :friends, through: :friendships, source: :friend
+
   def password=(unencrypted_password)
     @password = unencrypted_password
     self.password_digest = BCrypt::Password.create(unencrypted_password)
