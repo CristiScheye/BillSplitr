@@ -14,4 +14,9 @@ class Api::UsersController < Api::ApiController
     @users = User.where(id: @user_balances.keys)
     render :balances
   end
+
+  def friends
+    @friends = current_user.friends
+    render :friends
+  end
 end

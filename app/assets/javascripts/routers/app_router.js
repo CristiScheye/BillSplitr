@@ -21,7 +21,7 @@ window.BillSplitr.Routers.AppRouter = Backbone.Router.extend({
 
   new: function () {
     var bills = BillSplitr.bills
-    var users = BillSplitr.users
+    var users = new BillSplitr.Collections.Friends()
 
     var newBill = new BillSplitr.Views.NewBill({
       users: users,

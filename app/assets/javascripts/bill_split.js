@@ -34,7 +34,6 @@ Backbone.CompositeView = Backbone.View.extend({
   removeSubview: function(selector, subview) {
     var index = NaN;
     _.each(this.subviews(selector), function(currentSubview, idx) {
-      debugger;
       if (currentSubview === subview){
         index = idx;
       }

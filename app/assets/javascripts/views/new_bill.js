@@ -1,11 +1,12 @@
 window.BillSplitr.Views.NewBill = Backbone.CompositeView.extend({
   initialize: function (options) {
+    this.users = options.users;
     this.shareCount = 0;
     this.shareType = 'split-even'
     this.listenTo(this.collection, 'invalid', this.errorMsg);
-    this.listenTo(BillSplitr.users, 'sync', this.render)
+    this.listenTo(this.users, 'sync', this.render)
 
-    BillSplitr.users.fetch();
+    this.users.fetch();
   },
 
   events: {
@@ -20,7 +21,7 @@ window.BillSplitr.Views.NewBill = Backbone.CompositeView.extend({
   render: function () {
     var that = this;
     var content = this.template({
-      users: BillSplitr.users
+      users: this.users
     });
     this.$el.html(content);
     this.attachSubviews();
@@ -41,13 +42,12 @@ window.BillSplitr.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   displaySubmit: function () {
-    debugger;
     this.$el.find('#bill-submit').show();
   },
 
   addShareForm: function (event) {
     var userId = $('select').val();
-    var user = BillSplitr.users.get(userId);
+    var user = this.users.get(userId);
     var newBillShare = new BillSplitr.Views.NewBillShare({
       user: user,
       count: this.shareCount,
@@ -59,7 +59,6 @@ window.BillSplitr.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   removeShareForm: function (shareForm) {
-    debugger;
     this.shareCount -= 1;
     this.removeSubview('#new-bill-share', shareForm);
     this.formatAmountFields();
@@ -100,7 +99,6 @@ window.BillSplitr.Views.NewBill = Backbone.CompositeView.extend({
   },
 
   toggleAmountField: function (event, ui) {
-    debugger;
     var $billType = $(event.target)
     $billType.addClass('active')
     $billType.siblings().removeClass('active')
