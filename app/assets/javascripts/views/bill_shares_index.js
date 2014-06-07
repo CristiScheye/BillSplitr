@@ -52,8 +52,8 @@ window.BillSplitr.Views.BillSharesIndex = Backbone.View.extend({
         glyph = 'glyphicon-remove';
       }
       $('#modal2-glyphicon').addClass(glyph)
-      $('#modal2-lender-data').html(lender.escape('f_name') + ' ' + lender.escape('l_name'));
-      $('#modal2-debtor-data').html(debtor.escape('f_name') + ' ' + debtor.escape('l_name'));
+      $('#modal2-lender-data').html(lender.escape('name'));
+      $('#modal2-debtor-data').html(debtor.escape('name'));
       $('.modal2-amount-data').html(accounting.formatMoney(amt));
       $('.modal2-status-data').html(status);
       $('#modal2-description-data').html(description)

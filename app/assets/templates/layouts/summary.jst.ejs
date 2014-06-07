@@ -39,7 +39,7 @@
                       data-toggle="collapse"
                       data-parent="#top-accordion"
                       data-target="#bill-history-<%= user.id %>">
-                  <%= user.escape('f_name') %> <%= user.escape('l_name') %>
+                  <%= user.escape('name') %>
                 </div>
 
                 <div class='col-xs-3 neg-balance bills-index'
@@ -83,7 +83,7 @@
                       data-toggle="collapse"
                       data-parent="#bottom-accordion"
                       data-target="#bill-history-<%= user.id %>">
-                    <%= user.escape('f_name') %> <%= user.escape('l_name') %>
+                    <%= user.escape('name') %>
                 </div>
                 <div class='col-xs-3 pos-balance bills-index'
                       data-index="<%= user.id %>"

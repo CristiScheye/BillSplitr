@@ -12,6 +12,7 @@ json.debtor do
   json.f_name bill_share.debtor.f_name
   json.l_name bill_share.debtor.l_name
   json.email bill_share.debtor.email
+  json.name bill_share.debtor.name
 end
 
 json.lender do
@@ -19,4 +20,5 @@ json.lender do
   json.f_name bill_share.bill.lender.f_name
   json.l_name bill_share.bill.lender.l_name
   json.email bill_share.bill.lender.email
+  json.name bill_share.bill.lender.name
 end

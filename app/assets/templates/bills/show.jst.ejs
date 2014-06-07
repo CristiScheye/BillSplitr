@@ -8,39 +8,35 @@
         <div class="row">
           <div class="col-xs-12">
             <h4>Date: <%= bill.escape('date') %></h4>
-            <h4>Posted By: <%= lender.escape('f_name') + ' ' + lender.escape('l_name') %></h4>
+            <h4>Posted By: <%= lender.displayName() %></h4>
           </div>
         </div>
 
         <br>
 
         <div class="row lender">
-          <div class="col-xs-8">
-            <%= lender.escape('f_name') + ' '
-                + lender.escape('l_name') + ' '
-                + '(' + lender.escape('email') + ')' %>
+          <div class="col-xs-9">
+            <%= lender.displayName() %>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-3">
             <%= accounting.formatMoney(bill.escape('amount_not_charged')) %>
           </div>
         </div>
 
         <% bill_shares.forEach(function(bill_share) { %>
           <div class="row">
-            <div class="col-xs-8">
-              <%= bill_share.debtor().escape('f_name') + ' '
-                  + bill_share.debtor().escape('l_name') + ' '
-                  + '(' + bill_share.debtor().escape('email') + ')'  %>
+            <div class="col-xs-9">
+              <%= bill_share.debtor().displayName() %>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
               <%= accounting.formatMoney(bill_share.escape('amount')) %>
             </div>
           </div>
         <% }) %>
 
         <div class="row ">
-          <div class="col-xs-8 total">Total</div>
-          <div class="col-xs-4 total"><%= accounting.formatMoney(bill.escape('amount')) %></div>
+          <div class="col-xs-9 total">Total</div>
+          <div class="col-xs-3 total"><%= accounting.formatMoney(bill.escape('amount')) %></div>
         </div>
       </div>
 

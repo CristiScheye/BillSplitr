@@ -9,8 +9,7 @@
         <% friends.forEach(function(friend){ %>
           <ul>
             <li>
-              <%= friend.escape('f_name') + ' ' + friend.escape('l_name') + ' ' %>
-              (<%= friend.escape('email') %>)
+              <%= friend.displayName() %>
             </li>
           </ul>
         <% }) %>

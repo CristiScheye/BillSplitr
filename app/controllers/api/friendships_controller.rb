@@ -2,7 +2,7 @@ class Api::FriendshipsController < Api::ApiController
   def create
     friend = User.find_or_create_by(email: friend_params[:email])
     unless friend.persisted?
-      friend.f_name, friend.l_name = 'NAME', 'NAME'
+      friend.f_name, friend.l_name = 'n/a', 'n/a'
       friend.password = SecureRandom.urlsafe_base64
       friend.save
     end

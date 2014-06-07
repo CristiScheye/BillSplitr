@@ -44,7 +44,7 @@
             <option value=""></option>
             <% users.forEach(function(user){ %>
               <option value="<%= user.id %>">
-              <%= user.escape('f_name') %> <%= user.escape('l_name') %> - <%= user.escape('email') %>
+              <%= user.displayName() %>
               </option>
             <% }) %>
           </select>

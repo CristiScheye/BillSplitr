@@ -32,8 +32,8 @@ window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
       var otherUser = BillSplitr.users.get(userId);
       var currentUser = BillSplitr.users.get(BillSplitr.currentUser.id);
 
-      $('#modal-other-user-data').html(otherUser.escape('f_name') + ' ' + otherUser.escape('l_name'));
-      $('#modal-current-user-data').html(currentUser.escape('f_name') + ' ' + currentUser.escape('l_name'));
+      $('#modal-other-user-data').html(otherUser.escape('name'));
+      $('#modal-current-user-data').html(currentUser.escape('name'));
       $('#modal-amount-data').html(accounting.formatMoney(amt))
       // add info to confirmation for editBalance params
       $('#edit-modal-confirmation').attr({

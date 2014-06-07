@@ -56,6 +56,14 @@ class User < ActiveRecord::Base
     balances
   end
 
+  def name
+    if self.f_name == 'n/a' || self.l_name == 'n/a'
+      ''
+    else
+      "#{self.f_name.titleize} #{self.l_name.titleize}"
+    end
+  end
+
   protected
 
   def loan_subtotals
