@@ -9,10 +9,10 @@ class Api::FriendshipsController < Api::ApiController
     friendship = current_user.friendships.build(friend: friend)
 
     if friendship.save
-      render :friendship 
+      redirect_to api_user_url(friend)
     else
       render json: {
-        errors: friendship.errors.full_messages
+        errors: friendship.errors.full_messages,
         status: :unprocessable_entity
       }
     end

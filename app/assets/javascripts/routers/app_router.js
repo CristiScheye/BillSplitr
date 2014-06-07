@@ -7,6 +7,7 @@ window.BillSplitr.Routers.AppRouter = Backbone.Router.extend({
     '' : 'dashboard',
     'bills/new' : 'new',
     'bills/:id' : 'show',
+    'friends' : 'friends'
   },
 
   dashboard: function () {
@@ -17,6 +18,16 @@ window.BillSplitr.Routers.AppRouter = Backbone.Router.extend({
       userBalances: userBalances
     });
     this._swapView(main);
+  },
+
+  friends: function () {
+    var friends = new BillSplitr.Collections.Friends();
+    friends.fetch();
+
+    var friendsView = new BillSplitr.Views.Friends({
+      collection: friends
+    });
+    this._swapView(friendsView)
   },
 
   new: function () {

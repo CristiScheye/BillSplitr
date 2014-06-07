@@ -33,7 +33,6 @@ window.BillSplitr.Views.BillSharesIndex = Backbone.View.extend({
     billShare.save();
   },
 
-
   showModal: function (event) {
     $('#editModal2').on('show.bs.modal', function (e) {
       var btnData = $(event.target)
