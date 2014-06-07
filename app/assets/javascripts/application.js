@@ -18,7 +18,7 @@
 //= require serialize_json
 //= require accounting.min
 //= require chosen.jquery
-//= require bill_split
+//= require bill_splitr
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
