@@ -37,6 +37,16 @@ mary = User.create({
   password: 'password'
 })
 
+# users = [guest, ferris, dude, nancy, mary]
+
+User.all.each do |user1|
+  User.all.each do |user2|
+    next if user1 == user2
+    Friendship.create({user_id: user1.id, friend_id: user2.id})
+  end
+end
+
+
 b1 = Bill.create({ lender_id: guest.id, amount: 30, description: 'Kites', date: Date.today - 5 })
 b2 = Bill.create({ lender_id: guest.id, amount: 40, description: 'Bowling Night', date: Date.today - 1 })
 b3 = Bill.create({ lender_id: ferris.id, amount: 44, description: 'Kitchen sink ice cream challenge!!!', date: Date.today - 10 })
