@@ -4,17 +4,17 @@ window.BillSplitr.Routers.AppRouter = Backbone.Router.extend({
   },
 
   routes: {
-    '' : 'dashboard',
+    '' : 'summary',
     'bills/new' : 'new',
     'bills/:id' : 'show',
     'friends' : 'friends'
   },
 
-  dashboard: function () {
+  summary: function () {
     var userBalances = new BillSplitr.Collections.UserBalances();
     userBalances.fetch();
 
-    var main =  new BillSplitr.Views.Dashboard({
+    var main =  new BillSplitr.Views.Summary({
       userBalances: userBalances
     });
     this._swapView(main);

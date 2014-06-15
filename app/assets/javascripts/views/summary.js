@@ -1,6 +1,9 @@
 window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
   initialize: function (options) {
-    this.listenTo(this.collection, 'sync', this.render)
+    this.userBalances = options.userBalances;
+
+    this.listenTo(BillSplitr.bills, 'sync', this.syncBalances);
+    this.listenTo(this.userBalances, 'sync', this.render)
     BillSplitr.users.fetch();
   },
   events: {
@@ -12,9 +15,9 @@ window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
   template: JST['layouts/summary'],
 
   render: function () {
-    var totals = this.collection.currentUserTotals();
+    var totals = this.userBalances.currentUserTotals();
     var content = this.template({
-      userBalances: this.collection,
+      userBalances: this.userBalances,
       totals: totals
     });
     this.$el.html(content);
@@ -63,7 +66,7 @@ window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
         status: status
       },
       success: function () {
-        view.collection.fetch();
+        view.userBalances.fetch();
       }
     })
   },
@@ -95,6 +98,6 @@ window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
     })
   },
   syncBalances: function() {
-    this.collection.fetch();
+    this.userBalances.fetch();
   }
 })
