@@ -3,16 +3,21 @@
     <div class="col-xs-10 col-xs-offset-1">
       <h1 class="div-title">Friends</h1>
 
-      <div class="bordered-table">
-        <div id='new-friendship'></div>
+      <div class="bordered-table row">
+        <div class="col-xs-12 col-sm-4">
+          <div id='new-friendship'></div>
+        </div>
 
-        <% friends.forEach(function(friend){ %>
-          <ul>
-            <li>
-              <%= friend.displayName() %>
-            </li>
-          </ul>
-        <% }) %>
+        <div class="col-xs-12 col-sm-8">
+          <table class="table">
+            <% friends.forEach(function(friend){ %>
+              <tr>
+                <td><%= friend.escape('name') %></td>
+                <td><%= friend.escape('email') %></td>
+              </tr>
+            <% }) %>
+          </div>
+        </table>
       </div>
     </div>
   </div>
