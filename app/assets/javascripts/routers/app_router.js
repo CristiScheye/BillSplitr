@@ -11,11 +11,8 @@ window.BillSplitr.Routers.AppRouter = Backbone.Router.extend({
   },
 
   summary: function () {
-    var userBalances = new BillSplitr.Collections.UserBalances();
-    userBalances.fetch();
-
     var main =  new BillSplitr.Views.Summary({
-      userBalances: userBalances
+      userBalances: BillSplitr.balances
     });
     this._swapView(main);
   },
@@ -31,19 +28,19 @@ window.BillSplitr.Routers.AppRouter = Backbone.Router.extend({
   },
 
   new: function () {
-    var bills = BillSplitr.bills
-    var users = new BillSplitr.Collections.Friends()
+    var bills = new BillSplitr.Collections.Bills();
+    var friends = new BillSplitr.Collections.Friends()
 
     var newBill = new BillSplitr.Views.NewBill({
-      users: users,
+      users: friends,
       collection: bills
     });
     this._swapView(newBill);
   },
 
   show: function (id) {
-    BillSplitr.bills.fetch()
-    var bill = BillSplitr.bills.getOrFetch(id)
+    var bills = new BillSplitr.Collections.Bills();
+    var bill = bills.getOrFetch(id)
 
     var billShow = new BillSplitr.Views.BillShow({
       collection: BillSplitr.bills,

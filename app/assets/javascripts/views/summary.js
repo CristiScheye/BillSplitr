@@ -1,10 +1,7 @@
 window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.userBalances = options.userBalances;
-
-    this.listenTo(BillSplitr.bills, 'sync', this.syncBalances);
     this.listenTo(this.userBalances, 'sync', this.render)
-    BillSplitr.users.fetch();
   },
   events: {
     'click button.edit-balance' : 'showModal',
@@ -75,11 +72,11 @@ window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
     var userId = $(event.currentTarget).attr('data-index');
     var subs = this.subviews('#bill-history-' + userId);
     if (subs.length === 0) {
-      this.addBillHistory(userId, this.toggleCollapse)
-    }
+      this.addBillHistory(userId)
+    } 
   },
 
-  addBillHistory: function (userId, callback) {
+  addBillHistory: function (userId) {
     var view = this;
     var userId = userId;
 

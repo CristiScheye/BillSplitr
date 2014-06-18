@@ -5,8 +5,11 @@ window.BillSplitr = {
   Routers: {},
   initialize: function() {
     var $rootEl = $('#content');
-    this.bills = new BillSplitr.Collections.Bills();
-    this.users = new BillSplitr.Collections.Users();
+    this.balances = new BillSplitr.Collections.UserBalances();
+    this.users = new BillSplitr.Collections.Friends();
+
+    this.balances.fetch();
+    this.users.fetch();
 
     this.router = new BillSplitr.Routers.AppRouter({
       $rootEl : $rootEl
