@@ -37,19 +37,22 @@
       <br>
       <div id="bill-share-form" style="display: none" class="row">
         <h2 class="div-title">Friends Details...</h3>
-        <div class="bordered-table">
-          <select class="chosen-select"
-                  data-placeholder="Find friends by name or email..."
-                  >
-            <option value=""></option>
-            <% users.forEach(function(user){ %>
-              <option value="<%= user.id %>">
-              <%= user.displayName() %>
-              </option>
-            <% }) %>
-          </select>
-
-          <div id="new-bill-share"></div>
+        <div class="bordered-table show-overflow">
+          <div class="col-xs-12 col-sm-4">
+            <div class="row">
+              <select class="chosen-select"
+                      data-placeholder="Find friends by name or email..."
+                      >
+                <option value=""></option>
+                <% users.forEach(function(user){ %>
+                  <option value="<%= user.id %>">
+                  <%= user.displayName() %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+          <div id="new-bill-share" class="col-xs-12 col-sm-6 col-sm-offset-2"></div>
           <br>
         </div>
       </div>

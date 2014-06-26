@@ -34,9 +34,7 @@ window.BillSplitr.Views.NewBill = Backbone.CompositeView.extend({
     var view = this;
     this.$el.find('#bill-share-form').show();
 
-    this.$el.find('.chosen-select').chosen({
-      width: "30%",
-    }).change(this.addShareForm.bind(view));
+    this.$el.find('.chosen-select').chosen().change(this.addShareForm.bind(view));
 
     this.$el.find('.chosen-select').one('change', this.displaySubmit.bind(this));
   },
