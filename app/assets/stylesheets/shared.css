@@ -28,6 +28,8 @@ h1, h2, h3{
 
 .show-overflow {
   overflow: visible;
-  padding-bottom: 200px;
-  display: block;
+}
+
+.clear {
+  clear: both;
 }
