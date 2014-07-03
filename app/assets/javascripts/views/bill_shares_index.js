@@ -43,8 +43,8 @@ window.BillSplitr.Views.BillSharesIndex = Backbone.View.extend({
       var description = btnData.attr('data-description');
       var billShareId = btnData.attr('data-id')
 
-      var lender = BillSplitr.users.get(lenderId);
-      var debtor = BillSplitr.users.get(debtorId);
+      var lender = BillSplitr.users.get(lenderId) || BillSplitr.currentUser;
+      var debtor = BillSplitr.users.get(debtorId) || BillSplitr.currentUser;
       var glyph = 'glyphicon '
       if (status === 'paid') {
         glyph += 'glyphicon-ok';
