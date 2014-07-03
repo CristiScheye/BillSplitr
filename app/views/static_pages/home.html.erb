@@ -1,8 +1,8 @@
 <script charset="utf-8">
     $(document).ready(function(){
-      BillSplitr.currentUser = {
+      BillSplitr.currentUser = new BillSplitr.Models.User({
         id: "<%= current_user.id %>"
-      }
+      });
     });
 </script>
 

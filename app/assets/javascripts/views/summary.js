@@ -30,7 +30,7 @@ window.BillSplitr.Views.Summary = Backbone.CompositeView.extend({
       var amt = Math.abs(parseFloat(btnData.attr('data-amt')));
 
       var otherUser = BillSplitr.users.get(userId);
-      var currentUser = BillSplitr.users.get(BillSplitr.currentUser.id);
+      var currentUser = BillSplitr.currentUser;
 
       $('#modal-other-user-data').html(otherUser.escape('name'));
       $('#modal-current-user-data').html(currentUser.escape('name'));
