@@ -16,6 +16,4 @@ class BillShare < ActiveRecord::Base
         user_id1, user_id2, user_id2, user_id1)
         .references(:bill)
   end
-
-
 end
